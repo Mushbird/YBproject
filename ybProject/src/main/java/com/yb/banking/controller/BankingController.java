@@ -66,7 +66,7 @@ public class BankingController {
 	
 	// 6. 계좌 생성처리
 	@PostMapping
-	public String account(HttpSession Session, Account accountInformation, @RequestParam("branchCode") int branchCode) {
+	public String account(HttpSession Session, Account accountInformation, @RequestParam("branchCode") String branchCode) {
 		// Controller 도착 확인
 		System.out.println("(C) 계좌 생성처리 ");
 		bankingService.account(Session, accountInformation, branchCode);

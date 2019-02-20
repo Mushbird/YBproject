@@ -5,13 +5,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class Branch {
 	
-	private int branchCode;
+	private String branchCode;
 	private String branchName;
 	private String manager;
-	public int getBranchCode() {
+	public String getBranchCode() {
 		return branchCode;
 	}
-	public void setBranchCode(int branchCode) {
+	public void setBranchCode(String branchCode) {
 		this.branchCode = branchCode;
 	}
 	public String getBranchName() {

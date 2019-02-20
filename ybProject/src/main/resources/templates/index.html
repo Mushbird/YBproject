@@ -7,8 +7,11 @@
 <body>
  메인화면 입니다.
 <input type="text" th:value="${session.clientId}">
+<input type="text" th:value="${session.accountCheck}">
 로그아웃
 <a th:href="@{/logout}">로그아웃</a>
+
+<!-- 계좌 생성 버튼 누를시 유효성검사 (session의 accountCheck(계정의 계좌갯수)가 3개 이상이면 생성 불가) -->
 <a th:href="@{/account}">계좌 생성</a>
 </body>
 </html>

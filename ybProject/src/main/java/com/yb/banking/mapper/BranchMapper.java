@@ -13,5 +13,5 @@ public interface BranchMapper {
 	List<Branch> branch();
 	
 	// 지점 조회(하나)
-	Branch branchOne(int branchCode);
+	Branch branchOne(String branchCode);
 }

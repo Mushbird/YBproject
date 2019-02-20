@@ -24,7 +24,8 @@
 		<td>
 		<label><b>계좌개설지점</b></label>
 		<select name="branchCode">
-			<option th:each="branchList : ${branchList}" th:name="${branchList.branchCode}" th:text="${branchList.branchCode}">
+			<option th:each="branchList : ${branchList}" th:value="${branchList.branchCode}">
+			<th:block th:text="${branchList.branchName}"></th:block>
 			</option>
 		</select>
 		</td>

@@ -32,6 +32,7 @@ public class BankingService {
 		client2.setClientId(client.getClientId());
 		
 		System.out.println("로그인 처리 시작");
+		
 		client2 = clientMapper.login(client2);
 		System.out.println("로그인 처리 완료");
 		
@@ -39,6 +40,8 @@ public class BankingService {
 		if(client2.getClientId().equals(client.getClientId()) && client2.getClientPw().equals(client.getClientPw())) {
 			// 로그인 성공 -> 로그인 정보 세션 등록
 			session.setAttribute("clientId", client.getClientId());
+			// 계좌 갯수 세션 등록
+			session.setAttribute("accountCheck", accountMapper.accountCheck(client.getClientId()));
 			System.out.println("로그인 성공 , 세션 등록");
 			return "redirect:/index";
 			
@@ -62,21 +65,25 @@ public class BankingService {
 		// Service 도착 확인
 		System.out.println("(S) 계좌 화면");
 		List<Branch> branchList = branchMapper.branch();
+		
 		return branchList;
 	}
 	
 	// 계좌 생성처리
-	public int account(HttpSession session, Account accountInformation, int branchCode) {
+	public int account(HttpSession session, Account accountInformation, String branchCode) {
 		// Service 도착 확인
 		System.out.println("(S) 계좌 생성처리");
-		System.out.println(branchCode + ": branchCode");
+		
 		// 회원 id정보 세팅
-		int clientId = (int)session.getAttribute("clientId");
-		accountInformation.setClientId(clientId);
-		// 지점 정보 가져오기
+		accountInformation.setClientId((String)session.getAttribute("clientId"));
+		
+		// 선택한 지점 정보(하나) 가져오기
 		Branch branchOne = branchMapper.branchOne(branchCode);
+		
+		// 지점 이름과 담당자를 계좌 생성 입력에 세팅
 		accountInformation.setAccountCreateBranch(branchOne.getBranchName());
-		accountInformation.setAccountCreateBranch(branchOne.getManager());
+		accountInformation.setAccountManager(branchOne.getManager());
+
 		// 계정 생성처리
 		accountMapper.account(accountInformation);
 		

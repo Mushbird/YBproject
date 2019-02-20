@@ -7,8 +7,8 @@ public class Order {
 	
 	private String orderDay;
 	private int orderNumber;
-	private int accountNumber;
-	private int clientId;
+	private String accountNumber;
+	private String clientId;
 	private int itemCode;
 	private int orderCount;
 	private int orderPay;
@@ -24,16 +24,16 @@ public class Order {
 	public void setOrderNumber(int orderNumber) {
 		this.orderNumber = orderNumber;
 	}
-	public int getAccountNumber() {
+	public String getAccountNumber() {
 		return accountNumber;
 	}
-	public void setAccountNumber(int accountNumber) {
+	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-	public int getClientId() {
+	public String getClientId() {
 		return clientId;
 	}
-	public void setClientId(int clientId) {
+	public void setClientId(String clientId) {
 		this.clientId = clientId;
 	}
 	public int getItemCode() {

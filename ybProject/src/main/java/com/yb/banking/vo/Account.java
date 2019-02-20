@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class Account {
 	
 	private String accountNumber;
-	private int clientId;
+	private String clientId;
 	private String accountName;
 	private int deposit;
 	private String accountCreateBranch;
@@ -18,10 +18,10 @@ public class Account {
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-	public int getClientId() {
+	public String getClientId() {
 		return clientId;
 	}
-	public void setClientId(int clientId) {
+	public void setClientId(String clientId) {
 		this.clientId = clientId;
 	}
 	public String getAccountName() {

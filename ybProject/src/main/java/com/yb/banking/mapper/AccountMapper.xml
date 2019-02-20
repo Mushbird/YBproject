@@ -6,31 +6,41 @@
 	<!-- 계좌 생성 -->	
 	<insert id="account"
 			parameterType="com.yb.banking.vo.Account">
-		INSERT INTO account(
-			account_number,
-			client_id,
-			account_name,
-			deposit,
-			account_create_branch,
-			account_manager
-		)
-		VALUES(
-			(CONCAT(
-					(SELECT 
-						branch_code as branchCode 
-					FROM branch 
-					WHERE branch_name as branchName = #{accountCreateBranch}),
-					(SELECT EXTRACT
-						(DAY_SECOND FROM now()
-						)
-					)
-					)
+			INSERT INTO account(
+				account_number,
+				client_id,
+				account_name,
+				deposit,
+				account_create_branch,
+				account_manager
 			)
-			#{clientId}
-			#{accountName}
-			#{deposit}
-			#{accountCreateBranch}
-			#{accountManager}
-		)
+			VALUES(
+				(SELECT CONCAT(
+						(SELECT 
+							branch_code
+						FROM branch 
+						WHERE branch_name = #{accountCreateBranch}
+						),
+						(SELECT EXTRACT(
+							DAY_SECOND FROM now()
+							)
+						)
+				)
+				),
+				#{clientId},
+				#{accountName},
+				#{deposit},
+				#{accountCreateBranch},
+				#{accountManager}
+			)
 	</insert>
+	<!-- 계좌 갯수 조회 (유효성 검사)-->
+	<select id="accountCheck"
+			parameterType="String"
+			resultType="int">
+			SELECT 
+				count(*) 
+			FROM account 
+			WHERE client_id = #{clientId};
+	</select>
 </mapper>
