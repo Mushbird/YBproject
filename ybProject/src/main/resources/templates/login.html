@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="login" method="post">
+		<table border="1">
+			<tr>
+				<td><input type="text" name="clientId" id="clientId">
+				</td>
+			</tr>
+			<tr>
+				<td><input type="text" name="clientPw" id="clientPw">
+				</td>
+				<td><button th:text="추가하기" class="btn btn-outline-info" id="boardBtn"></button></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

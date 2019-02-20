@@ -1,17 +1,20 @@
 package com.yb.banking.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Client {
 	
-	private int clientId;
+	private String clientId;
 	private String clientPw;
 	private String clientName;
 	private String clientAddress;
 	private String clientPhone;
 	private int branchCode;
-	public int getClientId() {
+	public String getClientId() {
 		return clientId;
 	}
-	public void setClientId(int clientId) {
+	public void setClientId(String clientId) {
 		this.clientId = clientId;
 	}
 	public String getClientPw() {

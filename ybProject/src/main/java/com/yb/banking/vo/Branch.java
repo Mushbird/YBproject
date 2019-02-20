@@ -1,5 +1,8 @@
 package com.yb.banking.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Branch {
 	
 	private int branchCode;

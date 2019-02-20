@@ -1,17 +1,20 @@
 package com.yb.banking.vo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Account {
 	
-	private int accountNumber;
+	private String accountNumber;
 	private int clientId;
 	private String accountName;
 	private int deposit;
 	private String accountCreateBranch;
 	private String accountManager;
-	public int getAccountNumber() {
+	public String getAccountNumber() {
 		return accountNumber;
 	}
-	public void setAccountNumber(int accountNumber) {
+	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
 	public int getClientId() {
