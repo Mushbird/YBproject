@@ -1,10 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>계좌 생성</title>
 </head>
 <body>
-account 화면
+<form action="/action" method="Post">
+<input type="hidden" name="${session.clientId}" id="${session.clientId}">
+<table>
+	<tr>
+		<td>
+		<label><b>계좌명</b></label>
+		<input type="text" name="accountName" id="accountName">
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<label><b>예수금</b></label>
+		<input type="text" name="deposit" id="deposit">
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<label><b>계좌개설지점</b></label>
+		<select name="branchCode">
+			<option th:each="branchList : ${branchList}" th:name="${branchList.branchCode}" th:text="${branchList.branchCode}">
+			</option>
+		</select>
+		</td>
+	</tr>
+	<tr>
+		<td><button th:text="생성하기" class="btn btn-outline-info" id="boardBtn"></button></td>
+	</tr>
+</table>
+</form>
 </body>
 </html>

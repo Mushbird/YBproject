@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,18 +57,19 @@ public class BankingController {
 	
 	// 5. 계좌 생성화면
 	@GetMapping("/account")
-	public String account() {
+	public String account(Model model) {
 		// Controller 도착 확인
 		System.out.println("(C) 계좌 생성 화면 ");
+		model.addAttribute("branchList", bankingService.account());
 		return "account";
 	}
 	
 	// 6. 계좌 생성처리
 	@PostMapping
-	public String account(Account accountInformation) {
+	public String account(HttpSession Session, Account accountInformation, @RequestParam("branchCode") int branchCode) {
 		// Controller 도착 확인
 		System.out.println("(C) 계좌 생성처리 ");
-		bankingService.account(accountInformation);
+		bankingService.account(Session, accountInformation, branchCode);
 		return "index";
 	}
 	

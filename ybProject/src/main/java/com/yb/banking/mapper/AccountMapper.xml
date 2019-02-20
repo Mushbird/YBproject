@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yb.banking.mapper.AccountMapper">
+	<!-- 계좌 생성 -->	
+	<insert id="account"
+			parameterType="com.yb.banking.vo.Account">
+		INSERT INTO account(
+			account_number,
+			client_id,
+			account_name,
+			deposit,
+			account_create_branch,
+			account_manager
+		)
+		VALUES(
+			(CONCAT(
+					(SELECT 
+						branch_code as branchCode 
+					FROM branch 
+					WHERE branch_name as branchName = #{accountCreateBranch}),
+					(SELECT EXTRACT
+						(DAY_SECOND FROM now()
+						)
+					)
+					)
+			)
+			#{clientId}
+			#{accountName}
+			#{deposit}
+			#{accountCreateBranch}
+			#{accountManager}
+		)
+	</insert>
+</mapper>

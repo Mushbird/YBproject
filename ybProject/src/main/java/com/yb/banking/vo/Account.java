@@ -11,6 +11,7 @@ public class Account {
 	private int deposit;
 	private String accountCreateBranch;
 	private String accountManager;
+	
 	public String getAccountNumber() {
 		return accountNumber;
 	}

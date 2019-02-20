@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yb.banking.mapper.ClientMapper">
+	<!-- 로그인 정보 가져오기 -->
+	<select id="login"
+			parameterType="com.yb.banking.vo.Client"
+			resultType="com.yb.banking.vo.Client">
+			SELECT
+				client_id as clientId,
+				client_pw as clientPw
+			FROM client
+			WHERE client_id = #{clientId}
+	</select>
+	<!-- 고객 정보 가져오기 -->
+	<select id="client"
+			parameterType="com.yb.banking.vo.Client"
+			resultType="com.yb.banking.vo.Client">
+			SELECT
+				account_number as accountNumber,
+				client_id as clientId,
+				account_name as accountName,
+				deposit as deposit,
+				account_create_branch as accountCreateBranch,
+				account_manager as accountManager,
+				get_account_number as getAccountNumber
+			FROM 
+				Account
+	</select>	
+</mapper>
