@@ -1,5 +1,7 @@
 package com.yb.banking.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.yb.banking.vo.Account;
@@ -13,4 +15,7 @@ public interface AccountMapper {
 	
 	// 계좌 갯수 확인 (유효성 검사)(3개이상인지 확인)
 	int accountCheck(String ClientId);
+	
+	//mypage (계좌조회)화면 
+	List<Account> mypage(String ClientId);
 }

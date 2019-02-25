@@ -43,4 +43,18 @@
 			FROM account 
 			WHERE client_id = #{clientId};
 	</select>
+	<!-- 나의 계좌정보 불러오기 -->
+	<select id="accountInformation"
+			parameterType="String"
+			resultType="com.yb.banking.vo.Account">
+			SELECT
+				account_number as accountNumber,
+				client_id as clientId,
+				account_name as accountName,
+				deposit,
+				account_create_branch as accountCreateBranch,
+				account_manager as accountManager
+			FROM account 
+			WHERE client_id = #{clientId};		
+	</select>
 </mapper>

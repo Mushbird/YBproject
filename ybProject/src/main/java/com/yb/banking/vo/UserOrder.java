@@ -3,7 +3,7 @@ package com.yb.banking.vo;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Order {
+public class UserOrder {
 	
 	private String orderDay;
 	private int orderNumber;
@@ -56,7 +56,7 @@ public class Order {
 	}
 	@Override
 	public String toString() {
-		return "Order [orderDay=" + orderDay + ", orderNumber=" + orderNumber + ", accountNumber=" + accountNumber
+		return "UserOrder [orderDay=" + orderDay + ", orderNumber=" + orderNumber + ", accountNumber=" + accountNumber
 				+ ", clientId=" + clientId + ", itemCode=" + itemCode + ", orderCount=" + orderCount + ", orderPay="
 				+ orderPay + "]";
 	}

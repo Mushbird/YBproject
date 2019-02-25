@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 import com.yb.banking.mapper.AccountMapper;
 import com.yb.banking.mapper.BranchMapper;
 import com.yb.banking.mapper.ClientMapper;
+import com.yb.banking.mapper.UserOrderMapper;
 import com.yb.banking.vo.Account;
 import com.yb.banking.vo.Branch;
 import com.yb.banking.vo.Client;
+import com.yb.banking.vo.UserOrder;
 
 @Service
 public class BankingService {
@@ -20,6 +22,7 @@ public class BankingService {
 	@Autowired private ClientMapper clientMapper;
 	@Autowired private BranchMapper branchMapper;
 	@Autowired private AccountMapper accountMapper;
+	@Autowired private UserOrderMapper userOrderMapper;
 	@Autowired private Client client2;
 	@Autowired private Branch branch;
 	
@@ -90,5 +93,26 @@ public class BankingService {
 		return 0;
 		
 	}
+	
+	// 계좌 정보
+	public List<Account> accountList(String ClientId) {
+		// Service 도착 확인
+		System.out.println("(S) mypage 내 계좌정보");
+		List<Account> accountList = accountMapper.mypage(ClientId);
+		return accountList;
+	}
+	// 내 주문 내역
+	public List<UserOrder> orderList(String ClientId) {
+		// Service 도착 확인
+		System.out.println("(S)mypage 내 주문내역");
+		List<UserOrder> orderList = userOrderMapper.orderList(ClientId);
+		return orderList;
+	}
+	
+	// 주문 하기
+	
+	// 전체 주문 조회
+	
+	// 관리점 조회
 	
 }

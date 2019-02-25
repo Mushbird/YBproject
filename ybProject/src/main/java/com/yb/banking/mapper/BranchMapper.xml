@@ -5,14 +5,13 @@
 <mapper namespace="com.yb.banking.mapper.BranchMapper">
 	<!-- 지점 정보 가져오기(모든) -->
 	<select id="branch"
-			parameterType="com.yb.banking.vo.Branch"
 			resultType="com.yb.banking.vo.Branch">
 			SELECT 
 				branch_code as branchCode,
 				branch_name as branchName,
 				manager as manager
 			FROM
-				Branch
+				branch
 	</select>
 	<!-- 지점 정보 가져오기(하나) -->
 	<select id="branchOne"
@@ -23,7 +22,7 @@
 				branch_name as branchName,
 				manager as manager
 			FROM
-				Branch
+				branch
 			WHERE
 				branch_code = #{branchCode}
 	</select>

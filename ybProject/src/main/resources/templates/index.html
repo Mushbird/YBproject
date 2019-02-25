@@ -8,6 +8,7 @@
  메인화면 입니다.
 <input type="text" th:value="${session.clientId}">
 <input type="text" th:value="${session.accountCheck}">
+<a th:href="${/mypage(clientId=session.clientId)}">마이페이지</a>
 로그아웃
 <a th:href="@{/logout}">로그아웃</a>
 

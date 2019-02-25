@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.yb.banking.service.BankingService;
 import com.yb.banking.vo.Account;
 import com.yb.banking.vo.Client;
+import com.yb.banking.vo.UserOrder;
 
 @Controller
 public class BankingController {
@@ -65,7 +66,7 @@ public class BankingController {
 	}
 	
 	// 6. 계좌 생성처리
-	@PostMapping
+	@PostMapping("/account")
 	public String account(HttpSession Session, Account accountInformation, @RequestParam("branchCode") String branchCode) {
 		// Controller 도착 확인
 		System.out.println("(C) 계좌 생성처리 ");
@@ -73,13 +74,20 @@ public class BankingController {
 		return "index";
 	}
 	
-	// 6. 계좌 조회(하나)
+	// 7. 마이페이지 (계좌 조회 및 주문내역) 
+	@GetMapping("/mypage")
+	public String mypage(Model model, @RequestParam("ClientId") String ClientId ) {
+		// Controller 도착 확인
+		System.out.println("(C) mypage(계좌조회) ");
+		model.addAttribute("account",bankingService.accountList(ClientId));
+		model.addAttribute("order", bankingService.orderList(ClientId));
+		return "mypage";
+		
+	}
 	
-	// 7. 주문 조회
+	// 8. 주문 하기
 	
-	// 8. 종목 조회(검색)
-	
-	// 9. 종목 주문
+	// 9. 주문 조회
 	
 	// 10. 관리점 조회
 	
