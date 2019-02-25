@@ -71,15 +71,15 @@ public class BankingController {
 		// Controller 도착 확인
 		System.out.println("(C) 계좌 생성처리 ");
 		bankingService.account(Session, accountInformation, branchCode);
-		return "index";
+		return "mypage";
 	}
 	
 	// 7. 마이페이지 (계좌 조회 및 주문내역) 
 	@GetMapping("/mypage")
-	public String mypage(Model model, @RequestParam("ClientId") String ClientId ) {
+	public String mypage(Model model, @RequestParam("clientId") String ClientId ) {
 		// Controller 도착 확인
 		System.out.println("(C) mypage(계좌조회) ");
-		model.addAttribute("account",bankingService.accountList(ClientId));
+		model.addAttribute("account",bankingService.accountInformation(ClientId));
 		model.addAttribute("order", bankingService.orderList(ClientId));
 		return "mypage";
 		

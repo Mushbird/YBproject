@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>메인 화면</title>
+
+<!-- jquery사용 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+</head>
+<body>
+마이페이지
+회원 ID<br>
+<input type="text" th:value="${session.clientId}">
+개좌 갯수 :
+<input type="text" th:value="${session.accountCheck}"><br>
+
+<!-- 계좌 갯수가 3개이면 생성버튼 X -->
+<th:block th:if="${session.accountCheck >= 3}" >
+
+</th:block>
+
+<th:block th:unless="${session.accountCheck == null}" >
+
+<a th:href="@{/account}">계좌 생성</a>
+
+</th:block>
+로그아웃
+<a th:href="@{/logout}">로그아웃</a>
+
+
+</body>
+</html>

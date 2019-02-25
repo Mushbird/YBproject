@@ -89,16 +89,19 @@ public class BankingService {
 
 		// 계정 생성처리
 		accountMapper.account(accountInformation);
+		// 계좌 갯수 갱신
+		session.setAttribute("accountCheck", accountMapper.accountCheck((String)session.getAttribute("clientId")));
 		
+		System.out.println("(S) 계좌 생성완료");
 		return 0;
 		
 	}
 	
 	// 계좌 정보
-	public List<Account> accountList(String ClientId) {
+	public List<Account> accountInformation(String ClientId) {
 		// Service 도착 확인
 		System.out.println("(S) mypage 내 계좌정보");
-		List<Account> accountList = accountMapper.mypage(ClientId);
+		List<Account> accountList = accountMapper.accountInformation(ClientId);
 		return accountList;
 	}
 	// 내 주문 내역

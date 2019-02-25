@@ -17,5 +17,5 @@ public interface AccountMapper {
 	int accountCheck(String ClientId);
 	
 	//mypage (계좌조회)화면 
-	List<Account> mypage(String ClientId);
+	List<Account> accountInformation(String ClientId);
 }

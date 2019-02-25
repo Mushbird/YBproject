@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yb.banking.mapper.UserOrderMapper">
+	<!-- 주문하기 -->
+	<insert id="order"
+			parameterType="com.yb.banking.vo.UserOrder">
+			INSERT INTO order(
+				order_day,
+				order_number,
+				account_number,
+				client_id,
+				item_code,
+				order_count,
+				order_pay 
+			)
+			VALUES(
+				NOW(),
+				(SELECT CONCAT(
+							(SELECT 
+								branch_code
+							FROM branch 
+							WHERE branch_name = #{accountCreateBranch}
+							),
+							(SELECT EXTRACT(
+								DAY_SECOND FROM now()
+								)
+							)
+					)
+					),
+				#{accountNumber},
+				#{clientId},
+				#{itemCode},
+				#{orderCount},
+				#{orderPay}
+			)
+	</insert>
+	<!-- 나의 주문내역 가져오기 -->
+	<select id="orderList"
+				parameterType="com.yb.banking.vo.UserOrder"
+				resultType="com.yb.banking.vo.UserOrder">
+			SELECT
+				order_day as orderDay,
+				order_number as orderNumber,
+				account_number as accountNumber,
+				client_id as clientId,
+				item_code as itemCode,
+				order_count as orderCount,
+				order_pay as orderPay
+			FROM
+				userOrder
+			WHERE
+				client_id = #{clientId}
+	</select>
+	<!-- 전체 주문내역 가져오기 -->
+	<select id="allOrderList"
+				resultType="com.yb.banking.vo.UserOrder">
+			SELECT
+				order_day as orderDay,
+				order_number as orderNumber,
+				account_number as accountNumber,
+				client_id as clientId,
+				item_code as itemCode,
+				order_count as orderCount,
+				order_pay as orderPay
+			FROM
+				userOrder
+	</select>
+</mapper>

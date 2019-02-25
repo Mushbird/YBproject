@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>메인 화면</title>
+</head>
+<body>
+ 메인화면 입니다.<br>
+회원 ID<br>
+<input type="text" th:value="${session.clientId}">
+
+<a th:href="@{/mypage(clientId=${session.clientId})}">마이페이지</a>
+로그아웃
+<a th:href="@{/logout}">로그아웃</a>
+</body>
+</html>

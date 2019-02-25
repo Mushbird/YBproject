@@ -51,7 +51,7 @@
 				account_number as accountNumber,
 				client_id as clientId,
 				account_name as accountName,
-				deposit,
+				deposit as deposit,
 				account_create_branch as accountCreateBranch,
 				account_manager as accountManager
 			FROM account 
