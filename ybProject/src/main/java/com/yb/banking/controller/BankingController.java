@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.yb.banking.service.BankingService;
 import com.yb.banking.vo.Account;
 import com.yb.banking.vo.Client;
-import com.yb.banking.vo.UserOrder;
 
 @Controller
 public class BankingController {
@@ -53,7 +52,7 @@ public class BankingController {
 		// Controller 도착 확인
 		System.out.println("(C) 로그아웃 ");
 		bankingService.logout(session);
-		return "redirect:/login";		
+		return "index";		
 	}
 	
 	// 5. 계좌 생성화면
@@ -85,9 +84,16 @@ public class BankingController {
 		
 	}
 	
-	// 8. 주문 하기
+	// 8. 리스트 화면
+	@GetMapping("/userOrderList")
+	public String userOrderList() {
+		// Controller 도착 확인
+		System.out.println("(C) 리스트 화면 "); 
+		
+		return "userOrderList";
+	}
 	
-	// 9. 주문 조회
+	// 9. 주문 하기
 	
 	// 10. 관리점 조회
 	

@@ -43,13 +43,15 @@ public class BankingService {
 		if(client2.getClientId().equals(client.getClientId()) && client2.getClientPw().equals(client.getClientPw())) {
 			// 로그인 성공 -> 로그인 정보 세션 등록
 			session.setAttribute("clientId", client.getClientId());
+			session.setAttribute("clientName", client2.getClientName());
+			System.out.println("clientName : "+client2.getClientName());
 			// 계좌 갯수 세션 등록
 			session.setAttribute("accountCheck", accountMapper.accountCheck(client.getClientId()));
 			System.out.println("로그인 성공 , 세션 등록");
 			return "redirect:/index";
 			
 		} else {
-			// 로그인 실패 -> 로그인 호면으로 리다이렉트
+			// 로그인 실패 -> 로그인 화면으로 리다이렉트
 			System.out.println("로그인 실패");
 			return "redirect:/login";
 		}
@@ -101,6 +103,7 @@ public class BankingService {
 	public List<Account> accountInformation(String ClientId) {
 		// Service 도착 확인
 		System.out.println("(S) mypage 내 계좌정보");
+		// 계좌 정보 가져오기
 		List<Account> accountList = accountMapper.accountInformation(ClientId);
 		return accountList;
 	}
@@ -108,6 +111,7 @@ public class BankingService {
 	public List<UserOrder> orderList(String ClientId) {
 		// Service 도착 확인
 		System.out.println("(S)mypage 내 주문내역");
+		// 주문 내역 가져오기
 		List<UserOrder> orderList = userOrderMapper.orderList(ClientId);
 		return orderList;
 	}

@@ -124,29 +124,70 @@
         return i === 0 ? 1 : i;
       }),
       datasets: [{
-        label: '18K',
+        label: '순금',
         fill: 'start',
-        data: [500, 800, 320, 180, 240, 320, 230, 650, 590, 1200, 750, 940, 1420, 1200, 960, 1450, 1820, 2800, 2102, 1920, 3920, 3202, 3140, 2800, 3200, 3200, 3400, 2910, 3100, 4250],
-        backgroundColor: 'rgba(0,123,255,0.1)',
-        borderColor: 'rgba(0,123,255,1)',
+        data: [46602,46386,46715,46454,46533,46734,46484,46483,46746,46637
+        	,46458,46307,46791,47067,47227,47311,47467,47224,47313,47376
+        	,47466,47374,47353,47787,47907,48166,48464,48356,47947,47836],
+        backgroundColor: 'rgba(0, 184, 216, 0.1)',
+        borderColor: 'rgba(0,184,216,1)',
         pointBackgroundColor: '#ffffff',
-        pointHoverBackgroundColor: 'rgb(0,123,255)',
+        pointHoverBackgroundColor: 'rgb(0,184,216)',
         borderWidth: 1.5,
         pointRadius: 0,
         pointHoverRadius: 3
       }, {
-        label: '14K',
+        label: '18K',
         fill: 'start',
-        data: [380, 430, 120, 230, 410, 740, 472, 219, 391, 229, 400, 203, 301, 380, 291, 620, 700, 300, 630, 402, 320, 380, 289, 410, 300, 530, 630, 720, 780, 1200],
-        backgroundColor: 'rgba(255,65,105,0.1)',
-        borderColor: 'rgba(255,65,105,1)',
+        data: [43602,43386,43715,43454,43533,43734,43484,43483,43746,43637
+        	,43458,43307,43791,43067,43227,43311,43467,44224,44313,44376
+        	,44466,44374,44353,44787,44907,45166,45464,45356,44947,44836],
+        backgroundColor: 'rgba(23,198,113,0.1)',
+        borderColor: 'rgba(23,198,113,1)',
         pointBackgroundColor: '#ffffff',
-        pointHoverBackgroundColor: 'rgba(255,65,105,1)',
-        borderDash: [3, 3],
-        borderWidth: 1,
+        pointHoverBackgroundColor: 'rgba(23,198,113,1)',
+        borderWidth: 1.5,
         pointRadius: 0,
-        pointHoverRadius: 2,
-        pointBorderColor: 'rgba(255,65,105,1)'
+        pointHoverRadius: 3
+      }, {
+		label: '14K',
+		fill: 'start',
+		data: [41602,41386,41715,41454,41533,41734,42484,42483,42746,42637
+        	,41458,41307,41791,41067,42227,42311,41467,42224,42313,41376
+        	,41466,42374,42353,41787,41907,42166,42464,42356,41947,42838],
+		backgroundColor: 'rgba(255,180,0,0.1)',
+		borderColor: 'rgba(255,180,0,1)',
+		pointBackgroundColor: '#ffffff',
+		pointHoverBackgroundColor: 'rgba(255,180,0,1)',
+        borderWidth: 1.5,
+        pointRadius: 0,
+        pointHoverRadius: 3
+      }, {
+		label: '은',
+		fill: 'start',
+		data: [36820,36821,36813,36798,36795,36803,36807,35797,35786,35792
+			,34799,34813,34809,34809,34820,35822,35818,35815,35809,35793
+			,34799,34782,34785,34788,34785,34803,34817,33830,33822,33842],
+		backgroundColor: 'rgba(255,65,105,0.1)',
+		borderColor: 'rgba(255,65,105,1)',
+		pointBackgroundColor: '#ffffff',
+		pointHoverBackgroundColor: 'rgba(255,65,105,1)',
+        borderWidth: 1.5,
+        pointRadius: 0,
+        pointHoverRadius: 3
+      }, {
+		label: '백금',
+		fill: 'start',
+		data: [33820,33821,33813,33798,33795,32803,32807,34797,34786,34792
+			,33799,33813,33809,32809,32820,32822,32818,34815,35809,35793
+			,35799,36782,36785,36788,36785,35803,35817,34830,34822,34849],
+		backgroundColor: 'rgba(0,123,255,0.1)',
+		borderColor: 'rgba(0,123,255,1)',
+		pointBackgroundColor: '#ffffff',
+		pointHoverBackgroundColor: 'rgba(0,123,255,1)',
+        borderWidth: 1.5,
+        pointRadius: 0,
+        pointHoverRadius: 3
       }]
     };
 

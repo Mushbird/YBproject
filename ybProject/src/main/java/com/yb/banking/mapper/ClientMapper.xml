@@ -9,6 +9,7 @@
 			resultType="com.yb.banking.vo.Client">
 			SELECT
 				client_id as clientId,
+				client_name as clientName,
 				client_pw as clientPw
 			FROM client
 			WHERE client_id = #{clientId}
@@ -18,13 +19,12 @@
 			parameterType="com.yb.banking.vo.Client"
 			resultType="com.yb.banking.vo.Client">
 			SELECT
-				account_number as accountNumber,
 				client_id as clientId,
-				account_name as accountName,
-				deposit as deposit,
-				account_create_branch as accountCreateBranch,
-				account_manager as accountManager,
-			FROM 
-				account	
+				client_pw as clientPw
+				client_name as clientName,
+				client_address as clientAddress,
+				client_phone as clientPhone,
+				branch_code as branchCode,
+			FROM client
 	</select>	
 </mapper>

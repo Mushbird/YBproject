@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.yb.banking.vo.Account;
-import com.yb.banking.vo.Client;
 
 @Mapper
 public interface AccountMapper {
