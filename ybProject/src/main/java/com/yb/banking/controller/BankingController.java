@@ -66,22 +66,21 @@ public class BankingController {
 	
 	// 6. 계좌 생성처리
 	@PostMapping("/account")
-	public String account(HttpSession Session, Account accountInformation, @RequestParam("branchCode") String branchCode) {
+	public String account(HttpSession session, Account accountInformation, @RequestParam("branchCode") String branchCode) {
 		// Controller 도착 확인
 		System.out.println("(C) 계좌 생성처리 ");
-		bankingService.account(Session, accountInformation, branchCode);
-		return "mypage";
+		bankingService.account(session, accountInformation, branchCode);
+		return "redirect:/mypage";
 	}
 	
 	// 7. 마이페이지 (계좌 조회 및 주문내역) 
 	@GetMapping("/mypage")
-	public String mypage(Model model, @RequestParam("clientId") String ClientId ) {
+	public String mypage(Model model, HttpSession session ) {
 		// Controller 도착 확인
 		System.out.println("(C) mypage(계좌조회) ");
-		model.addAttribute("account",bankingService.accountInformation(ClientId));
-		model.addAttribute("order", bankingService.orderList(ClientId));
+		model.addAttribute("account",bankingService.accountInformation((String)session.getAttribute("clientId")));
+		model.addAttribute("order", bankingService.orderList((String)session.getAttribute("clientId")));
 		return "mypage";
-		
 	}
 	
 	// 8. 리스트 화면

@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js h-100" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html class="no-js h-100" xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -12,6 +12,21 @@
     <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0" href="styles/shards-dashboards.1.1.0.min.css">
     <link rel="stylesheet" href="styles/extras.1.1.0.min.css">
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+<!-- jquery를 사용하기 위한 작성 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- 유효성 처리 -->
+	<script>
+		$(document).ready(function(){
+			$('#accountCheck').click(function(){
+				$('#account').submit(function(event){
+					if($('#accountCheck').val() >= '3'){
+						(alert('계좌는 3개까지 생성이 가능 합니다.'));
+						return false;
+					}
+				});
+			});
+		});
+    </script>
   </head>
   <body class="h-100">
     <div class="container-fluid">
@@ -153,96 +168,97 @@
               </div>
             </div>
 <!-- End Page Header -->
-<!-- Default Light Table -->
+<!-- Default Light Table 프로필 정보 상단-->
             <div class="row">
               <div class="col-lg-4">
                 <div class="card card-small mb-4 pt-3">
+                  <Form action="/account" method="get" id="account">
                   <div class="card-header border-bottom text-center">
                     <div class="mb-3 mx-auto">
                       <img class="rounded-circle" src="images/avatars/0.jpg" alt="User Avatar" width="110"> </div>
-                    <h4 class="mb-0">Sierra Brooks</h4>
-                    <span class="text-muted d-block mb-2">Project Manager</span>
-                    <button type="button" class="mb-2 btn btn-sm btn-pill btn-outline-primary mr-2">
-                      <i class="material-icons mr-1">person_add</i>Follow</button>
+                    	<h4 class="mb-0" ><th:block th:text="${session.clientName}"></th:block></h4>
+                    <span class="text-muted d-block mb-2">회원</span>
+                    <button type="submit" class="mb-2 btn btn-sm btn-pill btn-outline-primary mr-2 " id="accountCheck" th:value="${session.accountCheck}">
+                      <i class="material-icons mr-1">credit_card</i>계좌생성</button>
                   </div>
+                  	</Form>
+          <!-- 프로필정보 하단 -->
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item px-4">
                       <div class="progress-wrapper">
-                        <strong class="text-muted d-block mb-2">Workload</strong>
+                        <strong class="text-muted d-block mb-2">계좌수</strong>
+                        <div class="progress progress-sm">
+                          <div class="progress-bar bg-primary" role="progressbar" th:aria-valuenow="${session.accountCheck}" aria-valuemin="0" aria-valuemax="3"  style="width: 60%;">
+                            <span class="progress-value"><th:block th:text="${((session.accountCheck%3)*30)}"></th:block>%</span>
+                          </div>
+                        </div>
+                      </div>
+                    </li> 
+                    <li class="list-group-item px-4">
+                      <div class="progress-wrapper">
+                        <strong class="text-muted d-block mb-2">사용 가능한 금액</strong>
                         <div class="progress progress-sm">
                           <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100" style="width: 74%;">
-                            <span class="progress-value">74%</span>
+                            <span class="progress-value">1,198,500 / 1,900,000원</span>
                           </div>
                         </div>
                       </div>
                     </li>
+                     
                     <li class="list-group-item p-4">
-                      <strong class="text-muted d-block mb-2">Description</strong>
-                      <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?</span>
-                    </li>
+                      <!-- <strong class="text-muted d-block mb-2">Description</strong>
+                      <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?</span> -->
+                    </li> 
+                    
                   </ul>
+          <!-- 프로필정보 하단 -->
                 </div>
               </div>
+          <!-- 계좌 정보 조회 (최대3개) 시작-->
               <div class="col-lg-8">
-                <div class="card card-small mb-4">
+              <!-- 계좌 1개 -->
+                <div class="card card-small mb-4" th:each="a :${account}">
                   <div class="card-header border-bottom">
-                    <h6 class="m-0">Account Details</h6>
+                    <h6 class="m-0">계좌 정보</h6>
                   </div>
                   <ul class="list-group list-group-flush">
                     <li class="list-group-item p-3">
                       <div class="row">
                         <div class="col">
-                          <form>
                             <div class="form-row">
-                              <div class="form-group col-md-6">
-                                <label for="feFirstName">First Name</label>
-                                <input type="text" class="form-control" id="feFirstName" placeholder="First Name" value="Sierra"> </div>
-                              <div class="form-group col-md-6">
-                                <label for="feLastName">Last Name</label>
-                                <input type="text" class="form-control" id="feLastName" placeholder="Last Name" value="Brooks"> </div>
+                              <div class="form-group col-md-6">         
+                                <label for="feFirstName">계좌명</label>
+                                <input th:value="${a.accountName}" type="text" class="form-control" id="feFirstName" readonly> </div>
+                              <div class="form-group col-md-6"></div>
                             </div>
                             <div class="form-row">
                               <div class="form-group col-md-6">
-                                <label for="feEmailAddress">Email</label>
-                                <input type="email" class="form-control" id="feEmailAddress" placeholder="Email" value="sierra@example.com"> </div>
-                              <div class="form-group col-md-6">
-                                <label for="fePassword">Password</label>
-                                <input type="password" class="form-control" id="fePassword" placeholder="Password"> </div>
+                                <label for="feEmailAddress">계좌번호</label>
+                                <input th:value="${a.accountNumber}" type="text" class="form-control" id="feEmailAddress" readonly> </div>
+                              <div class="form-group col-md-6"></div>
                             </div>
-                            <div class="form-group">
-                              <label for="feInputAddress">Address</label>
-                              <input type="text" class="form-control" id="feInputAddress" placeholder="1234 Main St"> </div>
+                            <div class="form-group"></div>
                             <div class="form-row">
                               <div class="form-group col-md-6">
-                                <label for="feInputCity">City</label>
-                                <input type="text" class="form-control" id="feInputCity"> </div>
+                                <label for="feInputCity">계좌 계설지점</label>
+                                <input th:value="${a.accountCreateBranch}" type="text" class="form-control" id="feInputCity" readonly> </div>
                               <div class="form-group col-md-4">
-                                <label for="feInputState">State</label>
-                                <select id="feInputState" class="form-control">
-                                  <option selected>Choose...</option>
-                                  <option>...</option>
-                                </select>
-                              </div>
-                              <div class="form-group col-md-2">
-                                <label for="inputZip">Zip</label>
-                                <input type="text" class="form-control" id="inputZip"> </div>
+                                <label for="inputZip">계좌 담당자</label>
+                                <input th:value="${a.accountManager}" type="text" class="form-control" id="inputZip" readonly> </div>
+                              <div class="form-group col-md-2"></div>
                             </div>
-                            <div class="form-row">
-                              <div class="form-group col-md-12">
-                                <label for="feDescription">Description</label>
-                                <textarea class="form-control" name="feDescription" rows="5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?</textarea>
-                              </div>
-                            </div>
-                            <button type="submit" class="btn btn-accent">Update Account</button>
-                          </form>
+                            <div class="form-row"></div>
+                          </div>
                         </div>
-                      </div>
                     </li>
                   </ul>
                 </div>
+                
+                <!-- 계좌 끝 -->
               </div>
+        <!-- 계좌 정보 조회 (최대3개) 끝-->
             </div>
-<!-- End Default Light Table -->
+<!-- End Default Light Table 프로필 정보 -->
           </div>
           <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
             <ul class="nav">

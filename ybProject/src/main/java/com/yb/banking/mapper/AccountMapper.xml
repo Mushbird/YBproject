@@ -20,11 +20,14 @@
 							branch_code
 						FROM branch 
 						WHERE branch_name = #{accountCreateBranch}
-						),
-						(SELECT EXTRACT(
+						)
+						,'-'
+						,(SELECT EXTRACT(
 							DAY_SECOND FROM now()
 							)
 						)
+						,'-'
+						,(CAST((RAND()*899)+100 AS SIGNED)) 
 				)
 				),
 				#{clientId},
@@ -40,7 +43,7 @@
 			resultType="int">
 			SELECT 
 				count(*) 
-			FROM account 
+			FROM account
 			WHERE client_id = #{clientId};
 	</select>
 	<!-- 나의 계좌정보 불러오기 -->
