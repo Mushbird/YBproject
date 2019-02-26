@@ -8,12 +8,15 @@ import com.yb.banking.vo.UserOrder;
 
 @Mapper
 public interface UserOrderMapper {
-	// mypage에서 주문하기
+	// 주문하기(화면)
 	int order(UserOrder userOrder);
 	
-	// mypage에서 주문조회
+	// 주문 조회(회원)
 	List<UserOrder> orderList(String clientId);
 	
-	// 전체 주문조회
+	// 최근 주문 조회(회원)
+	List<UserOrder> orderListRecent(String clientId);
+	
+	// 주문 조회(전체)
 	List<UserOrder> allOrderList();
 }

@@ -49,6 +49,25 @@
 			WHERE
 				client_id = #{clientId}
 	</select>
+	<!-- 나의 최근 주문내역 가져오기 (5개만) -->
+	<select id="orderListRecent"
+				parameterType="com.yb.banking.vo.UserOrder"
+				resultType="com.yb.banking.vo.UserOrder">
+			SELECT
+				order_day as orderDay,
+				order_number as orderNumber,
+				account_number as accountNumber,
+				client_id as clientId,
+				item_code as itemCode,
+				order_count as orderCount,
+				order_pay as orderPay
+			FROM
+				userOrder
+			WHERE
+				client_id = #{clientId}
+			ORDER BY order_day DESC
+			LIMIT 0, 5
+	</select>
 	<!-- 전체 주문내역 가져오기 -->
 	<select id="allOrderList"
 				resultType="com.yb.banking.vo.UserOrder">

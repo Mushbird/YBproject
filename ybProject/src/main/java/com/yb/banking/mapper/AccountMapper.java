@@ -15,6 +15,6 @@ public interface AccountMapper {
 	// 계좌 갯수 확인 (유효성 검사)(3개이상인지 확인)
 	int accountCheck(String ClientId);
 	
-	//mypage (계좌조회)화면 
+	// mypage의 계좌조회 화면
 	List<Account> accountInformation(String ClientId);
 }

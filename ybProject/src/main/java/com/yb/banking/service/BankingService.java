@@ -101,27 +101,38 @@ public class BankingService {
 	// 계좌 정보
 	public List<Account> accountInformation(String ClientId) {
 		// Service 도착 확인
-		System.out.println("(S) mypage 내 계좌정보");
+		System.out.println("(S) 계좌 정보");
 		// 계좌 정보 가져오기
 		List<Account> accountList = accountMapper.accountInformation(ClientId);
 		return accountList;
 	}
+	
 	// 내 주문 내역
 	public List<UserOrder> orderList(String ClientId) {
 		// Service 도착 확인
-		System.out.println("(S)mypage 내 주문내역");
+		System.out.println("(S) 내 주문 내역");
 		// 주문 내역 가져오기
 		List<UserOrder> orderList = userOrderMapper.orderList(ClientId);
 		return orderList;
 	}
 	
+	// 최근 내 주문 내역 (5개)
+		public List<UserOrder> orderListRecent(String ClientId) {
+			// Service 도착 확인
+			System.out.println("(S) 최근 내 주문내역");
+			// 주문 내역 가져오기
+			List<UserOrder> orderListRecent = userOrderMapper.orderListRecent(ClientId);
+			return orderListRecent;
+	}
+		
 	// 주문 하기
 	public void UserOrder(UserOrder userOrder) {
+		// Service 도착 확인
+		System.out.println("(S) 주문하기");
 		userOrderMapper.order(userOrder);
 	}
 	
 	// 전체 주문 조회
-	
 	// 관리점 조회
 	
 }

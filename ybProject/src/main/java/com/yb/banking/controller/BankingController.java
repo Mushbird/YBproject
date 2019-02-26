@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.yb.banking.mapper.UserOrderMapper;
 import com.yb.banking.service.BankingService;
 import com.yb.banking.vo.Account;
 import com.yb.banking.vo.Client;
@@ -84,11 +85,16 @@ public class BankingController {
 		return "mypage";
 	}
 	
-	// 8. 리스트 화면
+	// 8. 품목 리스트 화면 (최근 내 구매 내역)
 	@GetMapping("/userOrderList")
-	public String userOrderList() {
+	public String userOrderList(Model model, HttpSession session) {
 		// Controller 도착 확인
-		System.out.println("(C) 리스트 화면 "); 
+		System.out.println("(C) 품목 리스트 화면 (최근 내 구매 내역) "); 
+		
+		// 최근 구매 내역을 화면에 뿌려주기 위해 가져오기 (로그인 상태에서만 호출)
+		if(session.getAttribute("clientId") != null) {	
+			model.addAttribute("orderListRecent", bankingService.orderListRecent((String)session.getAttribute("clientId")));
+		}
 		
 		return "userOrderList";
 	}
@@ -97,7 +103,7 @@ public class BankingController {
 	@GetMapping("/userOrder")
 	public String userOrder(Model model, HttpSession session, @RequestParam int itemCode, @RequestParam int orderPay, @RequestParam("itemName") String itemName) {
 		// Controller 도착 확인
-		System.out.println("(C) userOrder(주문) ");	
+		System.out.println("(C) 주문 하기(화면) ");	
 		model.addAttribute("account",bankingService.accountInformation((String)session.getAttribute("clientId")));
 		model.addAttribute("itemCode", itemCode);
 		model.addAttribute("orderPay", orderPay);
@@ -107,12 +113,11 @@ public class BankingController {
 	}
 	
 	// 10. 주문 처리
-	// 입력값은 REQUEST : userOrder
 	@PostMapping("/userOrder")
 	public String userOrder(UserOrder userOrder) {
 		// Controller 도착 확인
 		System.out.println("(C) userOrder(주문처리) ");
-		
+		// 주문 처리 실행
 		bankingService.UserOrder(userOrder);
 		return "redirect:/userOrderList";
 		

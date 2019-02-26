@@ -14,13 +14,17 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- jquery를 사용하기 위한 작성 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- 유효성 처리 -->
+<!-- 유효성 검사 (수량 입력, 입력이 되었으면 주문완료) -->
 	<script>
 		$(document).ready(function(){
-			$('#accountCheck').click(function(){
-				$('#account').submit(function(event){
-					if($('#accountCheck').val() >= '3'){
-						(alert('계좌는 3개까지 생성이 가능 합니다.'));
+			$('#order').click(function(){
+				$('#userOrder').submit(function(event){
+					if($('#orderCount').val().length<1){
+						$('#orderCount').attr('placeholder','수량을 입력해주세요.');
+						$('#orderCount').focus();
+						return false;
+					}else if($('#accountNumber').val() == null){
+						(alert("계좌를 생성하시고 진행해주세요."));
 						return false;
 					}
 				});
@@ -95,43 +99,6 @@
                  </div>
               </form>
               <ul class="navbar-nav border-left flex-row ">
-<!-- 알람창 (시작)-->
-                <li class="nav-item border-right dropdown notifications">
-                  <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="nav-link-icon__wrapper">
-                      <i class="material-icons">&#xE7F4;</i>
-                      <span class="badge badge-pill badge-danger">2</span>
-                    </div>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#">
-                      <div class="notification__icon-wrapper">
-                        <div class="notification__icon">
-                          <i class="material-icons">&#xE6E1;</i>
-                        </div>
-                      </div>
-                      <div class="notification__content">
-                        <span class="notification__category">Analytics</span>
-                        <p>Your website’s active users count increased by
-                          <span class="text-success text-semibold">28%</span> in the last week. Great job!</p>
-                      </div>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <div class="notification__icon-wrapper">
-                        <div class="notification__icon">
-                          <i class="material-icons">&#xE8D1;</i>
-                        </div>
-                      </div>
-                      <div class="notification__content">
-                        <span class="notification__category">Sales</span>
-                        <p>Last week your store’s sales count decreased by
-                          <span class="text-danger text-semibold">5.52%</span>. It could have been worse!</p>
-                      </div>
-                    </a>
-                    <a class="dropdown-item notification__all text-center" href="#"> View all Notifications </a>
-                  </div>
-                </li>
-<!-- 알람창 (종료)-->
 <!-- 마이페이지 및 로그아웃 선택창 (시작)-->
 			<th:block th:if="${session.clientId == null}">
 				<li class="nav-item dropdown">
@@ -142,6 +109,43 @@
                 </li>
 			</th:block>
 			<th:block th:unless="${session.clientId == null}">
+<!-- 알람창 (시작)-->
+              <li class="nav-item border-right dropdown notifications">
+                <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="nav-link-icon__wrapper">
+                    <i class="material-icons">&#xE7F4;</i>
+                    <span class="badge badge-pill badge-danger">2</span>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="#">
+                    <div class="notification__icon-wrapper">
+                      <div class="notification__icon">
+                        <i class="material-icons">&#xE6E1;</i>
+                      </div>
+                    </div>
+                    <div class="notification__content">
+                      <span class="notification__category">분석</span>
+                      <p>순금의 가격이 전일에 비해 47,387 약(
+                        <span class="text-success text-semibold">4.7% 상승</span> ) 하였습니다.</p>
+                    </div>
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <div class="notification__icon-wrapper">
+                      <div class="notification__icon">
+                        <i class="material-icons">&#xE8D1;</i>
+                      </div>
+                    </div>
+                    <div class="notification__content">
+                      <span class="notification__category">가격 감소</span>
+                      <p>14K의 가격이 전일에 비해 42,837 약(
+                        <span class="text-danger text-semibold">3.8% 감소</span> ) 하였습니다. 지금 구매하세요!</p>
+                    </div>
+                  </a>
+                  <a class="dropdown-item notification__all text-center" href="/userOrderList"> 시세 정보 보기 </a>
+                </div>
+              </li>
+<!-- 알람창 (종료)-->
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     <img class="user-avatar rounded-circle mr-2" src="images/avatars/0.jpg" alt="User Avatar">
@@ -175,49 +179,59 @@
               </div>
             </div>
 <!-- End Page Header -->
-			<form action="/userOrder" method="Post">
-			<input type="hidden" name="clientId" id="${session.clientId}" th:value="${session.clientId}">
-			<table>
-				<tr>
-					<td>
-					<label><b>상품명</b></label>
-					<input type="text" name="accountName" id="accountName" th:value="${itemName}">
-					</td>
-				</tr>
-				<tr>
-					<td>
-					<label><b>종목코드</b></label>
-					<input type="text" name="itemCode" id="itemCode" th:value="${itemCode}">
-					</td>
-				</tr>
-				<tr>
-					<td>
-					<label><b>계좌번호</b></label>
-					<select name="accountNumber">
-						<option th:each="account : ${account}" th:value="${account.accountNumber}">
-						<th:block th:text="${account.accountNumber}"></th:block>
-						</option>
-					</select>
-				</tr>
-				<tr>
-					<td>
-					<label><b>수량</b></label>
-					<input type="text" name="orderCount" id="orderCount" >
-					</td>
-				</tr>
-				<tr>
-					<td>
-					<label><b>1개당 금액</b></label>
-					<input type="text" name="orderPay" id="orderPay" th:value="${orderPay}">
-					</td>
-				</tr>
-				<tr>
-					<td><button th:text="주문하기" class="btn btn-outline-info" id="boardBtn"></button></td>
-				</tr>
-			</table>
-			</form>
-            </div>
-<!-- 메인 페이지 (시작) -->
+<!-- 주문하기 메인 화면(시작) -->
+          <div class="col-lg-8">
+                <div class="card card-small mb-4">
+                  <div class="card-header border-bottom">
+                    <h6 class="m-0">주문정보 입력</h6>
+                  </div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item p-3">
+                      <div class="row">
+                        <div class="col">
+                          <form action="/userOrder" id="userOrder" method="Post">
+                          	<input type="hidden" name="clientId" id="${session.clientId}" th:value="${session.clientId}">
+                            <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="feFirstName">상품명</label>
+                                <input type="text" class="form-control" name="accountName" id="accountName" th:value="${itemName}" readonly></div>
+                            </div>
+                            <div class="form-row">    
+                              <div class="form-group col-md-6">
+                                <label for="feLastName">종목 코드</label>
+                                <input type="text" class="form-control" name="itemCode" id="itemCode" th:value="${itemCode}" readonly> </div>
+                            </div>
+                            <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="feFirstName">1개당 가격</label>
+                                <input type="text" class="form-control" name="orderPay" id="orderPay" th:value="${orderPay}" readonly></div>
+                            </div>
+                            <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="feFirstName">수량</label>
+                                <input type="text" class="form-control" name="orderCount" id="orderCount"></div>
+                            </div>
+                            <div class="form-row">
+                               <div class="form-group col-md-6">
+                                <label for="feLastName">계좌 선택</label>
+                                <select class="form-control" name="accountNumber" id="accountNumber">
+									<option th:each="account : ${account}" th:value="${account.accountNumber}" id="account">
+									<th:block th:text="${account.accountNumber}"></th:block>
+									</option>
+								</select>
+                               </div>
+                            </div>
+                            <button type="submit" class="btn btn-white" id="order">주문하기</button>
+                          </form>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+<!-- 주문하기 메인 화면(끝) -->
+              </div>
+<!-- 메인 페이지 (끝) -->
 <!-- End Default Light Table 프로필 정보 -->
           </div>
           <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
@@ -231,8 +245,8 @@
               </li> 
               -->
             </ul>
-            <span class="copyright ml-auto my-auto mr-2">Copyright © 2018
-              <a href="https://designrevision.com" rel="nofollow">DesignRevision</a>
+            <span class="copyright ml-auto my-auto mr-2">Copyright © 2019
+              <a href="https://github.com/Mushbird/YBproject" rel="nofollow">YB Project</a>
             </span>
           </footer>
         </main>

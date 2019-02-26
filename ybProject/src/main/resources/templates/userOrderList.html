@@ -82,53 +82,53 @@
                  </div>
               </form>
               <ul class="navbar-nav border-left flex-row ">
-<!-- 알람창 (시작)-->
-                <li class="nav-item border-right dropdown notifications">
-                  <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="nav-link-icon__wrapper">
-                      <i class="material-icons">&#xE7F4;</i>
-                      <span class="badge badge-pill badge-danger">2</span>
-                    </div>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#">
-                      <div class="notification__icon-wrapper">
-                        <div class="notification__icon">
-                          <i class="material-icons">&#xE6E1;</i>
-                        </div>
-                      </div>
-                      <div class="notification__content">
-                        <span class="notification__category">Analytics</span>
-                        <p>Your website’s active users count increased by
-                          <span class="text-success text-semibold">28%</span> in the last week. Great job!</p>
-                      </div>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <div class="notification__icon-wrapper">
-                        <div class="notification__icon">
-                          <i class="material-icons">&#xE8D1;</i>
-                        </div>
-                      </div>
-                      <div class="notification__content">
-                        <span class="notification__category">Sales</span>
-                        <p>Last week your store’s sales count decreased by
-                          <span class="text-danger text-semibold">5.52%</span>. It could have been worse!</p>
-                      </div>
-                    </a>
-                    <a class="dropdown-item notification__all text-center" href="#"> View all Notifications </a>
-                  </div>
-                </li>
-<!-- 알람창 (종료)-->
 <!-- 마이페이지 및 로그아웃 선택창 (시작)-->
 			<th:block th:if="${session.clientId == null}">
 				<li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle text-nowrap px-3" th:href="@{/login}" role="button" aria-haspopup="true" aria-expanded="false">
+                  <a class="nav-link dropdown-toggle dropdown-item text-nowrap px-3" data-toggle="modal" data-target="#loginModal" th:href="@{/login}" role="button" aria-haspopup="true" aria-expanded="false">
                     <img class="user-avatar rounded-circle mr-2" src="images/avatars/1.jpg" alt="User Avatar">
                     <span class="d-none d-md-inline-block">로그인</span>
                   </a>
                 </li>
 			</th:block>
 			<th:block th:unless="${session.clientId == null}">
+<!-- 알람창 (시작)-->
+              <li class="nav-item border-right dropdown notifications">
+                <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div class="nav-link-icon__wrapper">
+                    <i class="material-icons">&#xE7F4;</i>
+                    <span class="badge badge-pill badge-danger">2</span>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink">
+                  <a class="dropdown-item" href="#">
+                    <div class="notification__icon-wrapper">
+                      <div class="notification__icon">
+                        <i class="material-icons">&#xE6E1;</i>
+                      </div>
+                    </div>
+                    <div class="notification__content">
+                      <span class="notification__category">분석</span>
+                      <p>순금의 가격이 전일에 비해 47,387 약(
+                        <span class="text-success text-semibold">4.7% 상승</span> ) 하였습니다.</p>
+                    </div>
+                  </a>
+                  <a class="dropdown-item" href="#">
+                    <div class="notification__icon-wrapper">
+                      <div class="notification__icon">
+                        <i class="material-icons">&#xE8D1;</i>
+                      </div>
+                    </div>
+                    <div class="notification__content">
+                      <span class="notification__category">가격 감소</span>
+                      <p>14K의 가격이 전일에 비해 42,837 약(
+                        <span class="text-danger text-semibold">3.8% 감소</span> ) 하였습니다. 지금 구매하세요!</p>
+                    </div>
+                  </a>
+                  <a class="dropdown-item notification__all text-center" href="/userOrderList"> 시세 정보 보기 </a>
+                </div>
+              </li>
+<!-- 알람창 (종료)-->
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     <img class="user-avatar rounded-circle mr-2" src="images/avatars/0.jpg" alt="User Avatar">
@@ -500,53 +500,54 @@
               </div>
             </div>
 <!-- End Page Header -->
-<!-- 최근 구매 내역 시작 -->
-			
+<!-- 최근 구매 내역 시작 -->		
             <div class="row">
               <div class="col">
-                <div class="card card-small overflow-hidden mb-4">
+                <div class="card card-small overflow-hidden mb-4" >
                   <div class="card-header bg-dark">
-                    <!-- <h6 class="m-0 text-white">Inactive Users</h6> -->
+                    <h6 class="m-0 text-white">구매 내역</h6>
                   </div>
                   <div class="card-body p-0 pb-3 bg-dark text-center">
                     <table class="table table-dark mb-0">
-                      <thead class="thead-dark">
+                      <thead class="thead-dark" >
                         <tr>
-                          <th scope="col" class="border-bottom-0">주문번호</th>
-                          <th scope="col" class="border-bottom-0">품명</th>
-                          <th scope="col" class="border-bottom-0">개수</th>
-                          <th scope="col" class="border-bottom-0">금액</th>
-                          <th scope="col" class="border-bottom-0">주문일자</th>
+                          <th scope="col" class="border-bottom-0">주문 번호</th>
+                          <th scope="col" class="border-bottom-0">품명 코드</th>
+                          <th scope="col" class="border-bottom-0">구매 개수</th>
+                          <th scope="col" class="border-bottom-0">총 금액</th>
+                          <th scope="col" class="border-bottom-0">주문 일자</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Graham</td>
-                          <td>Brent</td>
-                          <td>Graham</td>
-                          <td>Brent</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Clark</td>
-                          <td>Angela</td>
-                          <td>Graham</td>
-                          <td>Brent</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td>Wylie</td>
-                          <td>Joseph</td>
-                          <td>Graham</td>
-                          <td>Brent</td>
-                        </tr>
-                        <tr>
-                          <td>4</td>
-                          <td>Garth</td>
-                          <td>Clementine</td>
-                          <td>Graham</td>
-                          <td>Brent</td>
+                        <tr th:each="orderListRecent : ${orderListRecent}">
+                          <td>
+                          	<th:block th:text="${orderListRecent.orderNumber}"></th:block>
+                          </td>
+                          <!-- if문을 이용한 품명 보여주기 -->
+                          <th:block th:if="${orderListRecent.itemCode == 300}">
+	                          <td>순금</td>
+	                      </th:block>
+	                      <th:block th:if="${orderListRecent.itemCode == 200}">
+	                          <td>18K</td>
+	                      </th:block>
+	                      <th:block th:if="${orderListRecent.itemCode == 100}">
+	                          <td>14K</td>
+	                      </th:block>
+	                      <th:block th:if="${orderListRecent.itemCode == 20}">
+	                          <td>은</td>
+	                      </th:block>
+	                      <th:block th:if="${orderListRecent.itemCode == 50}">
+	                          <td>백금</td>
+	                      </th:block>
+                          <td>
+                          	<th:block th:text="${orderListRecent.orderCount}"></th:block>
+                          </td>
+                          <td>
+                          	<th:block th:text="${orderListRecent.orderPay}"></th:block>
+                          </td>
+                          <td>
+                          	<th:block th:text="${orderListRecent.orderDay}"></th:block>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
@@ -554,7 +555,7 @@
                 </div>
               </div>
             </div>
-            </th:block>
+          </th:block>
 <!-- 최근 구매 내역 끝 -->
           </div>
           <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
@@ -568,13 +569,37 @@
               </li> 
               -->
             </ul>
-            <span class="copyright ml-auto my-auto mr-2">Copyright © 2018
-              <a href="https://designrevision.com" rel="nofollow">DesignRevision</a>
+            <span class="copyright ml-auto my-auto mr-2">Copyright © 2019
+              <a href="https://github.com/Mushbird/YBproject" rel="nofollow">YB Project</a>
             </span>
           </footer>
         </main>
       </div>
     </div>
+    
+	<!-- Login Modal-->
+	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">LOGIN</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form action="login" method="post">
+						아이디 : <input type="text" class="form-control" name="clientId" id="clientId"><br>
+						비밀번호 : <input type="password" class="form-control" name="clientPw" id="clientPw"><br>
+						<input type="submit" class="btn btn-primary" th:value="로그인">
+						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

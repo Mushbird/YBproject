@@ -82,43 +82,6 @@
                  </div>
               </form>
               <ul class="navbar-nav border-left flex-row ">
-<!-- 알람창 (시작)-->
-                <li class="nav-item border-right dropdown notifications">
-                  <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="nav-link-icon__wrapper">
-                      <i class="material-icons">&#xE7F4;</i>
-                      <span class="badge badge-pill badge-danger">2</span>
-                    </div>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#">
-                      <div class="notification__icon-wrapper">
-                        <div class="notification__icon">
-                          <i class="material-icons">&#xE6E1;</i>
-                        </div>
-                      </div>
-                      <div class="notification__content">
-                        <span class="notification__category">Analytics</span>
-                        <p>Your website’s active users count increased by
-                          <span class="text-success text-semibold">28%</span> in the last week. Great job!</p>
-                      </div>
-                    </a>
-                    <a class="dropdown-item" href="#">
-                      <div class="notification__icon-wrapper">
-                        <div class="notification__icon">
-                          <i class="material-icons">&#xE8D1;</i>
-                        </div>
-                      </div>
-                      <div class="notification__content">
-                        <span class="notification__category">Sales</span>
-                        <p>Last week your store’s sales count decreased by
-                          <span class="text-danger text-semibold">5.52%</span>. It could have been worse!</p>
-                      </div>
-                    </a>
-                    <a class="dropdown-item notification__all text-center" href="#"> View all Notifications </a>
-                  </div>
-                </li>
-<!-- 알람창 (종료)-->
 <!-- 마이페이지 및 로그아웃 선택창 (시작)-->
 			<th:block th:if="${session.clientId == null}">
 				<li class="nav-item dropdown">
@@ -129,6 +92,43 @@
                 </li>
 			</th:block>
 			<th:block th:unless="${session.clientId == null}">
+<!-- 알람창 (시작)-->
+               <li class="nav-item border-right dropdown notifications">
+                 <a class="nav-link nav-link-icon text-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   <div class="nav-link-icon__wrapper">
+                     <i class="material-icons">&#xE7F4;</i>
+                     <span class="badge badge-pill badge-danger">2</span>
+                   </div>
+                 </a>
+                 <div class="dropdown-menu dropdown-menu-small" aria-labelledby="dropdownMenuLink">
+                   <a class="dropdown-item" href="#">
+                     <div class="notification__icon-wrapper">
+                       <div class="notification__icon">
+                         <i class="material-icons">&#xE6E1;</i>
+                       </div>
+                     </div>
+                     <div class="notification__content">
+                       <span class="notification__category">분석</span>
+                       <p>순금의 가격이 전일에 비해 47,387 약(
+                         <span class="text-success text-semibold">4.7% 상승</span> ) 하였습니다.</p>
+                     </div>
+                   </a>
+                   <a class="dropdown-item" href="#">
+                     <div class="notification__icon-wrapper">
+                       <div class="notification__icon">
+                         <i class="material-icons">&#xE8D1;</i>
+                       </div>
+                     </div>
+                     <div class="notification__content">
+                       <span class="notification__category">가격 감소</span>
+                       <p>14K의 가격이 전일에 비해 42,837 약(
+                         <span class="text-danger text-semibold">3.8% 감소</span> ) 하였습니다. 지금 구매하세요!</p>
+                     </div>
+                   </a>
+                   <a class="dropdown-item notification__all text-center" href="/userOrderList"> 시세 정보 보기 </a>
+                 </div>
+               </li>
+<!-- 알람창 (종료)-->
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle text-nowrap px-3" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                     <img class="user-avatar rounded-circle mr-2" src="images/avatars/0.jpg" alt="User Avatar">
@@ -350,8 +350,8 @@
               </li> 
               -->
             </ul>
-            <span class="copyright ml-auto my-auto mr-2">Copyright © 2018
-              <a href="https://designrevision.com" rel="nofollow">DesignRevision</a>
+            <span class="copyright ml-auto my-auto mr-2">Copyright © 2019
+              <a href="https://github.com/Mushbird/YBproject" rel="nofollow">YB Project</a>
             </span>
           </footer>
         </main>
