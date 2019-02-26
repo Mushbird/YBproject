@@ -70,7 +70,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="/mypage">
+                <a class="nav-link" href="/mypage">
                   <i class="material-icons">person</i>
                   <span>마이 페이지</span>
                 </a>
@@ -165,109 +165,59 @@
               </nav>
             </nav>
           </div>
-			<div class="main-content-container container-fluid px-4">
+<!-- 메인 페이지 (시작) -->
+		<div class="main-content-container container-fluid px-4">
 <!-- Page Header -->
             <div class="page-header row no-gutters py-4">
               <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-                <span class="text-uppercase page-subtitle">My Page</span>
-                <h3 class="page-title">마이 페이지</h3>
+                <span class="text-uppercase page-subtitle">Order</span>
+                <h3 class="page-title">주문하기</h3>
               </div>
             </div>
 <!-- End Page Header -->
-<!-- Default Light Table 프로필 정보 상단-->
-            <div class="row">
-              <div class="col-lg-4">
-                <div class="card card-small mb-4 pt-3">
-                  <Form action="/account" method="get" id="account">
-                  <div class="card-header border-bottom text-center">
-                    <div class="mb-3 mx-auto">
-                      <img class="rounded-circle" src="images/avatars/0.jpg" alt="User Avatar" width="110"> </div>
-                    	<h4 class="mb-0" ><th:block th:text="${session.clientName}"></th:block></h4>
-                    <span class="text-muted d-block mb-2">회원</span>
-                    <button type="submit" class="mb-2 btn btn-sm btn-pill btn-outline-primary mr-2 " id="accountCheck" th:value="${session.accountCheck}">
-                      <i class="material-icons mr-1">credit_card</i>계좌생성</button>
-                  </div>
-                  	</Form>
-          <!-- 프로필정보 하단 -->
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item px-4">
-                      <div class="progress-wrapper">
-                        <strong class="text-muted d-block mb-2">계좌수</strong>
-                        <div class="progress progress-sm">
-                          <div class="progress-bar bg-primary" role="progressbar" th:aria-valuenow="${session.accountCheck}" aria-valuemin="0" aria-valuemax="3"  style="width: 60%;">
-                            <span class="progress-value"><th:block th:text="${((session.accountCheck%3)*30)}"></th:block>%</span>
-                          </div>
-                        </div>
-                      </div>
-                    </li> 
-                    <!--
-                    <li class="list-group-item px-4">
-                      <div class="progress-wrapper">
-                        <strong class="text-muted d-block mb-2">보유 금액</strong>
-                        <div class="progress progress-sm">
-                          <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100" style="width: 74%;">
-                            <span class="progress-value">1,900,000원</span>
-                          </div>
-                        </div>
-                      </div>
-                    </li> 
-                    -->
-                     
-                    <li class="list-group-item p-4">
-                      <!-- <strong class="text-muted d-block mb-2">Description</strong>
-                      <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?</span> -->
-                    </li> 
-                    
-                  </ul>
-          <!-- 프로필정보 하단 -->
-                </div>
-              </div>
-          <!-- 계좌 정보 조회 (최대3개) 시작-->
-              <div class="col-lg-8">
-              <!-- 계좌 1개 -->
-                <div class="card card-small mb-4" th:each="a :${account}">
-                  <div class="card-header border-bottom">
-                    <h6 class="m-0">계좌 정보</h6>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item p-3">
-                      <div class="row">
-                        <div class="col">
-                            <div class="form-row">
-                              <div class="form-group col-md-6">         
-                                <label for="feFirstName">계좌명</label>
-                                <input th:value="${a.accountName}" type="text" class="form-control" id="accountName" readonly> </div>
-                              <div class="form-group col-md-6">
-                              	<label for="feEmailAddress">계좌번호</label>
-                                <input th:value="${a.accountNumber}" type="text" class="form-control" id="accountNumber" readonly> </div>
-                            </div>
-                            <div class="form-row">
-                              <div class="form-group col-md-6">
-                                <label for="feEmailAddress">예수금</label>
-                                <input th:value="${a.deposit}" type="text" class="form-control" id="deposit" readonly> </div>
-                              <div class="form-group col-md-6"></div>
-                            </div>
-                            <div class="form-group"></div>
-                            <div class="form-row">
-                              <div class="form-group col-md-6">
-                                <label for="feInputCity">계좌 계설지점</label>
-                                <input th:value="${a.accountCreateBranch}" type="text" class="form-control" id="accountCreateBranch" readonly> </div>
-                              <div class="form-group col-md-4">
-                                <label for="inputZip">계좌 담당자</label>
-                                <input th:value="${a.accountManager}" type="text" class="form-control" id="accountManager" readonly> </div>
-                              <div class="form-group col-md-2"></div>
-                            </div>
-                            <div class="form-row"></div>
-                          </div>
-                        </div>
-                    </li>
-                  </ul>
-                </div>
-                
-                <!-- 계좌 끝 -->
-              </div>
-        <!-- 계좌 정보 조회 (최대3개) 끝-->
+			<form action="/userOrder" method="Post">
+			<input type="hidden" name="clientId" id="${session.clientId}" th:value="${session.clientId}">
+			<table>
+				<tr>
+					<td>
+					<label><b>상품명</b></label>
+					<input type="text" name="accountName" id="accountName" th:value="${itemName}">
+					</td>
+				</tr>
+				<tr>
+					<td>
+					<label><b>종목코드</b></label>
+					<input type="text" name="itemCode" id="itemCode" th:value="${itemCode}">
+					</td>
+				</tr>
+				<tr>
+					<td>
+					<label><b>계좌번호</b></label>
+					<select name="accountNumber">
+						<option th:each="account : ${account}" th:value="${account.accountNumber}">
+						<th:block th:text="${account.accountNumber}"></th:block>
+						</option>
+					</select>
+				</tr>
+				<tr>
+					<td>
+					<label><b>수량</b></label>
+					<input type="text" name="orderCount" id="orderCount" >
+					</td>
+				</tr>
+				<tr>
+					<td>
+					<label><b>1개당 금액</b></label>
+					<input type="text" name="orderPay" id="orderPay" th:value="${orderPay}">
+					</td>
+				</tr>
+				<tr>
+					<td><button th:text="주문하기" class="btn btn-outline-info" id="boardBtn"></button></td>
+				</tr>
+			</table>
+			</form>
             </div>
+<!-- 메인 페이지 (시작) -->
 <!-- End Default Light Table 프로필 정보 -->
           </div>
           <footer class="main-footer d-flex p-2 px-3 bg-white border-top">

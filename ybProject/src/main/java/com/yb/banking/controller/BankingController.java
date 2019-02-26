@@ -12,12 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.yb.banking.service.BankingService;
 import com.yb.banking.vo.Account;
 import com.yb.banking.vo.Client;
+import com.yb.banking.vo.UserOrder;
 
 @Controller
 public class BankingController {
 	@Autowired private BankingService bankingService;
 	
-	// 1. 로그인 화면
+	// 1. 로그인 화면 (사용 안함)
 	@GetMapping("/login")
 	public String login() {
 		// Controller 도착 확인
@@ -66,7 +67,7 @@ public class BankingController {
 	
 	// 6. 계좌 생성처리
 	@PostMapping("/account")
-	public String account(HttpSession session, Account accountInformation, @RequestParam("branchCode") String branchCode) {
+	public String account(HttpSession session, Account accountInformation, @RequestParam String branchCode) {
 		// Controller 도착 확인
 		System.out.println("(C) 계좌 생성처리 ");
 		bankingService.account(session, accountInformation, branchCode);
@@ -75,7 +76,7 @@ public class BankingController {
 	
 	// 7. 마이페이지 (계좌 조회 및 주문내역) 
 	@GetMapping("/mypage")
-	public String mypage(Model model, HttpSession session ) {
+	public String mypage(Model model, HttpSession session) {
 		// Controller 도착 확인
 		System.out.println("(C) mypage(계좌조회) ");
 		model.addAttribute("account",bankingService.accountInformation((String)session.getAttribute("clientId")));
@@ -92,7 +93,30 @@ public class BankingController {
 		return "userOrderList";
 	}
 	
-	// 9. 주문 하기
+	// 9. 주문 하기(화면)
+	@GetMapping("/userOrder")
+	public String userOrder(Model model, HttpSession session, @RequestParam int itemCode, @RequestParam int orderPay, @RequestParam("itemName") String itemName) {
+		// Controller 도착 확인
+		System.out.println("(C) userOrder(주문) ");	
+		model.addAttribute("account",bankingService.accountInformation((String)session.getAttribute("clientId")));
+		model.addAttribute("itemCode", itemCode);
+		model.addAttribute("orderPay", orderPay);
+		model.addAttribute("itemName", itemName);
+		return "userOrder";
+		
+	}
+	
+	// 10. 주문 처리
+	// 입력값은 REQUEST : userOrder
+	@PostMapping("/userOrder")
+	public String userOrder(UserOrder userOrder) {
+		// Controller 도착 확인
+		System.out.println("(C) userOrder(주문처리) ");
+		
+		bankingService.UserOrder(userOrder);
+		return "redirect:/userOrderList";
+		
+	}
 	
 	// 10. 관리점 조회
 	

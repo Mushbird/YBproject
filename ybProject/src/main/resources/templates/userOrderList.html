@@ -20,7 +20,7 @@
         <aside class="main-sidebar col-12 col-md-3 col-lg-2 px-0">
           <div class="main-navbar">
             <nav class="navbar align-items-stretch navbar-light bg-white flex-md-nowrap border-bottom p-0">
-              <a class="navbar-brand w-100 mr-0" href="#" style="line-height: 25px;">
+              <a class="navbar-brand w-100 mr-0" th:href="@{/index}" style="line-height: 25px;">
                 <div class="d-table m-auto">
                   <img id="main-logo" class="d-inline-block align-top mr-1" style="max-width: 25px;" src="images/shards-dashboards-logo.svg" alt="Shards Dashboard">
                   <span class="d-none d-md-inline ml-1">YB Bank</span>
@@ -54,6 +54,14 @@
                   <span>시세 정보</span>
                 </a>
               </li>
+              <th:block th:if="${session.clientId != null}">
+              <li class="nav-item">
+                <a class="nav-link" href="/mypage">
+                  <i class="material-icons">person</i>
+                  <span>마이 페이지</span>
+                </a>
+              </li>
+             </th:block> 
             </ul>
           </div>
         </aside>
@@ -148,101 +156,406 @@
 <!-- Page Header -->
             <div class="page-header row no-gutters py-4">
               <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
-                <span class="text-uppercase page-subtitle">Overview</span>
+                <span class="text-uppercase page-subtitle">item list</span>
                 <h3 class="page-title">품목 리스트</h3>
               </div>
             </div>
 <!-- End Page Header -->
-<!-- Default Light Table -->
+<!-- 품목 리스트 5개 시작 -->
             <div class="row">
-              <div class="col-lg-4">
-                <div class="card card-small mb-4 pt-3">
-                  <div class="card-header border-bottom text-center">
-                    <div class="mb-3 mx-auto">
-                      <img class="rounded-circle" src="images/avatars/0.jpg" alt="User Avatar" width="110"> </div>
-                    <h4 class="mb-0">Sierra Brooks</h4>
-                    <span class="text-muted d-block mb-2">Project Manager</span>
-                    <button type="button" class="mb-2 btn btn-sm btn-pill btn-outline-primary mr-2">
-                      <i class="material-icons mr-1">person_add</i>Follow</button>
-                  </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item px-4">
-                      <div class="progress-wrapper">
-                        <strong class="text-muted d-block mb-2">Workload</strong>
-                        <div class="progress progress-sm">
-                          <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="74" aria-valuemin="0" aria-valuemax="100" style="width: 74%;">
-                            <span class="progress-value">74%</span>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li class="list-group-item p-4">
-                      <strong class="text-muted d-block mb-2">Description</strong>
-                      <span>Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div class="col-lg-8">
+     <!-- 금 품목 -->
+              <div class="col">
                 <div class="card card-small mb-4">
                   <div class="card-header border-bottom">
-                    <h6 class="m-0">Account Details</h6>
+                  <!-- 품목 상단 (시작) -->
+                    <div class="input-group-append">
+                    	<h6 class="m-0" style="width : 80%">순금</h6>
+                    	<a th:href="@{/userOrder(itemCode=300, orderPay=45000, itemName=순금)}">
+                    	<th:block th:if="${session.clientId != null}">
+                    	<button type="button" class="btn btn-blue btn-pill btn-outline-primary" id="accountCheck" th:value="${session.accountCheck}">구매</button>
+                    	</th:block>
+                    	</a>
+                    </div>
+                  <!-- 품목 상단 (끝) -->
                   </div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item p-3">
-                      <div class="row">
-                        <div class="col">
-                          <form>
-                            <div class="form-row">
-                              <div class="form-group col-md-6">
-                                <label for="feFirstName">First Name</label>
-                                <input type="text" class="form-control" id="feFirstName" placeholder="First Name" value="Sierra"> </div>
-                              <div class="form-group col-md-6">
-                                <label for="feLastName">Last Name</label>
-                                <input type="text" class="form-control" id="feLastName" placeholder="Last Name" value="Brooks"> </div>
-                            </div>
-                            <div class="form-row">
-                              <div class="form-group col-md-6">
-                                <label for="feEmailAddress">Email</label>
-                                <input type="email" class="form-control" id="feEmailAddress" placeholder="Email" value="sierra@example.com"> </div>
-                              <div class="form-group col-md-6">
-                                <label for="fePassword">Password</label>
-                                <input type="password" class="form-control" id="fePassword" placeholder="Password"> </div>
-                            </div>
-                            <div class="form-group">
-                              <label for="feInputAddress">Address</label>
-                              <input type="text" class="form-control" id="feInputAddress" placeholder="1234 Main St"> </div>
-                            <div class="form-row">
-                              <div class="form-group col-md-6">
-                                <label for="feInputCity">City</label>
-                                <input type="text" class="form-control" id="feInputCity"> </div>
-                              <div class="form-group col-md-4">
-                                <label for="feInputState">State</label>
-                                <select id="feInputState" class="form-control">
-                                  <option selected>Choose...</option>
-                                  <option>...</option>
-                                </select>
-                              </div>
-                              <div class="form-group col-md-2">
-                                <label for="inputZip">Zip</label>
-                                <input type="text" class="form-control" id="inputZip"> </div>
-                            </div>
-                            <div class="form-row">
-                              <div class="form-group col-md-12">
-                                <label for="feDescription">Description</label>
-                                <textarea class="form-control" name="feDescription" rows="5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio eaque, quidem, commodi soluta qui quae minima obcaecati quod dolorum sint alias, possimus illum assumenda eligendi cumque?</textarea>
-                              </div>
-                            </div>
-                            <button type="submit" class="btn btn-accent">Update Account</button>
-                          </form>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
+                  <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0">
+                      <thead class="bg-light">
+                        <tr>
+                          <th scope="col" class="border-0">#</th>
+                          <th scope="col" class="border-0">날짜</th>
+                          <th scope="col" class="border-0">가격</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Ali</td>
+                          <td>Kerry</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Clark</td>
+                          <td>Angela</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Jerry</td>
+                          <td>Nathan</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Colt</td>
+                          <td>Angela</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Ali</td>
+                          <td>Kerry</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Ali</td>
+                          <td>Kerry</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Ali</td>
+                          <td>Kerry</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+               </div>
+       <!-- 18K 품목 -->
+               <div class="col">
+                <div class="card card-small mb-4">
+                  <div class="card-header border-bottom">    
+              <!-- 품목 상단 (시작) -->
+                 <div class="input-group-append">
+                 	<h6 class="m-0" style="width : 80%">18K</h6>
+                 	<a th:href="@{/userOrder(itemCode=200, orderPay=35000, itemName=18K)}">
+                 	<th:block th:if="${session.clientId != null}">
+                 	<button type="button" class="btn btn-blue btn-pill btn-outline-primary" id="accountCheck" th:value="${session.accountCheck}">구매</button>
+                 	</th:block>
+                 	</a>
+                 </div>
+               <!-- 품목 상단 (끝) -->
+                  </div>
+                  <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0">
+                      <thead class="bg-light">
+                        <tr>
+                          <th scope="col" class="border-0">#</th>
+                          <th scope="col" class="border-0">날짜</th>
+                          <th scope="col" class="border-0">가격</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Ali</td>
+                          <td>Kerry</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Clark</td>
+                          <td>Angela</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Jerry</td>
+                          <td>Nathan</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Colt</td>
+                          <td>Angela</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Colt</td>
+                          <td>Angela</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Ali</td>
+                          <td>Kerry</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Ali</td>
+                          <td>Kerry</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+       <!-- 14K 품목 -->
+              <div class="col">
+                <div class="card card-small mb-4">
+                  <div class="card-header border-bottom">
+              <!-- 품목 상단 (시작) -->
+                 <div class="input-group-append">
+                 	<h6 class="m-0" style="width : 80%">14K</h6>
+                 	<a th:href="@{/userOrder(itemCode=100, orderPay=25000, itemName=14K)}">
+                 	<th:block th:if="${session.clientId != null}">
+                 	<button type="button" class="btn btn-blue btn-pill btn-outline-primary" id="accountCheck" th:value="${session.accountCheck}">구매</button>
+                 	</th:block>
+                 	</a>
+                 </div>
+               <!-- 품목 상단 (끝) -->
+                  </div>
+                  <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0">
+                      <thead class="bg-light">
+                        <tr>
+                          <th scope="col" class="border-0">#</th>
+                          <th scope="col" class="border-0">날짜</th>
+                          <th scope="col" class="border-0">가격</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Ali</td>
+                          <td>Kerry</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Clark</td>
+                          <td>Angela</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Jerry</td>
+                          <td>Nathan</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Colt</td>
+                          <td>Angela</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Colt</td>
+                          <td>Angela</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Ali</td>
+                          <td>Kerry</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Ali</td>
+                          <td>Kerry</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+               </div>
+       <!-- 은 품목 -->
+              <div class="col">
+                <div class="card card-small mb-4">
+                  <div class="card-header border-bottom">
+              <!-- 품목 상단 (시작) -->
+                 <div class="input-group-append">
+                 	<h6 class="m-0" style="width : 80%">은</h6>
+                 	<a th:href="@{/userOrder(itemCode=20, orderPay=5000, itemName=은)}">
+                 	<th:block th:if="${session.clientId != null}">
+                 	<button type="button" class="btn btn-blue btn-pill btn-outline-primary" id="accountCheck" th:value="${session.accountCheck}">구매</button>
+                 	</th:block>
+                 	</a>
+                 </div>
+               <!-- 품목 상단 (끝) -->
+                  </div>
+                  <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0">
+                      <thead class="bg-light">
+                        <tr>
+                          <th scope="col" class="border-0">#</th>
+                          <th scope="col" class="border-0">날짜</th>
+                          <th scope="col" class="border-0">가격</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Ali</td>
+                          <td>Kerry</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Clark</td>
+                          <td>Angela</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Jerry</td>
+                          <td>Nathan</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Colt</td>
+                          <td>Angela</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Colt</td>
+                          <td>Angela</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Ali</td>
+                          <td>Kerry</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Ali</td>
+                          <td>Kerry</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+               </div>
+        <!-- 백금 품목 -->
+              <div class="col">
+                <div class="card card-small mb-4">
+                  <div class="card-header border-bottom">
+             <!-- 품목 상단 (시작) -->
+                 <div class="input-group-append">
+                 	<h6 class="m-0" style="width : 80%">백금</h6>
+                 	<a th:href="@{/userOrder(itemCode=50, orderPay=55000, itemName=백금)}">
+                 	<th:block th:if="${session.clientId != null}">
+                 	<button type="button" class="btn btn-blue btn-pill btn-outline-primary" id="accountCheck" th:value="${session.accountCheck}">구매</button>
+                 	</th:block>
+                 	</a>
+                 </div>
+               <!-- 품목 상단 (끝) -->
+                  </div>
+                  <div class="card-body p-0 pb-3 text-center">
+                    <table class="table mb-0">
+                      <thead class="bg-light">
+                        <tr>
+                          <th scope="col" class="border-0">#</th>
+                 		  <th scope="col" class="border-0">날짜</th>
+                          <th scope="col" class="border-0">가격</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Ali</td>
+                          <td>Kerry</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Clark</td>
+                          <td>Angela</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Jerry</td>
+                          <td>Nathan</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Colt</td>
+                          <td>Angela</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Colt</td>
+                          <td>Angela</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Ali</td>
+                          <td>Kerry</td>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>Ali</td>
+                          <td>Kerry</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+               </div>
+        <!-- 품목 끝 -->
+            </div>
+<!-- 품목 리스트 5개 끝 -->
+<!-- Page Header -->
+		<th:block th:if="${session.clientId != null}">
+            <div class="page-header row no-gutters py-4">
+              <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                <span class="text-uppercase page-subtitle">Recent purchases</span>
+                <h3 class="page-title">최근 구매 내역</h3>
+              </div>
+            </div>
+<!-- End Page Header -->
+<!-- 최근 구매 내역 시작 -->
+			
+            <div class="row">
+              <div class="col">
+                <div class="card card-small overflow-hidden mb-4">
+                  <div class="card-header bg-dark">
+                    <!-- <h6 class="m-0 text-white">Inactive Users</h6> -->
+                  </div>
+                  <div class="card-body p-0 pb-3 bg-dark text-center">
+                    <table class="table table-dark mb-0">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col" class="border-bottom-0">주문번호</th>
+                          <th scope="col" class="border-bottom-0">품명</th>
+                          <th scope="col" class="border-bottom-0">개수</th>
+                          <th scope="col" class="border-bottom-0">금액</th>
+                          <th scope="col" class="border-bottom-0">주문일자</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>1</td>
+                          <td>Graham</td>
+                          <td>Brent</td>
+                          <td>Graham</td>
+                          <td>Brent</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>Clark</td>
+                          <td>Angela</td>
+                          <td>Graham</td>
+                          <td>Brent</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>Wylie</td>
+                          <td>Joseph</td>
+                          <td>Graham</td>
+                          <td>Brent</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>Garth</td>
+                          <td>Clementine</td>
+                          <td>Graham</td>
+                          <td>Brent</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
-<!-- End Default Light Table -->
+            </th:block>
+<!-- 최근 구매 내역 끝 -->
           </div>
           <footer class="main-footer d-flex p-2 px-3 bg-white border-top">
             <ul class="nav">

@@ -6,7 +6,7 @@
 	<!-- 주문하기 -->
 	<insert id="order"
 			parameterType="com.yb.banking.vo.UserOrder">
-			INSERT INTO order(
+			INSERT INTO userOrder(
 				order_day,
 				order_number,
 				account_number,
@@ -18,11 +18,6 @@
 			VALUES(
 				NOW(),
 				(SELECT CONCAT(
-							(SELECT 
-								branch_code
-							FROM branch 
-							WHERE branch_name = #{accountCreateBranch}
-							),
 							(SELECT EXTRACT(
 								DAY_SECOND FROM now()
 								)
@@ -33,7 +28,8 @@
 				#{clientId},
 				#{itemCode},
 				#{orderCount},
-				#{orderPay}
+				#{orderPay} * #{orderCount}
+				
 			)
 	</insert>
 	<!-- 나의 주문내역 가져오기 -->

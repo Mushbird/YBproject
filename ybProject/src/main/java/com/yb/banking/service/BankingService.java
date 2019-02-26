@@ -24,7 +24,6 @@ public class BankingService {
 	@Autowired private AccountMapper accountMapper;
 	@Autowired private UserOrderMapper userOrderMapper;
 	@Autowired private Client client2;
-	@Autowired private Branch branch;
 	
 	// 로그인 처리
 	public String login(HttpSession session, Client client) {
@@ -53,7 +52,7 @@ public class BankingService {
 		} else {
 			// 로그인 실패 -> 로그인 화면으로 리다이렉트
 			System.out.println("로그인 실패");
-			return "redirect:/login";
+			return "redirect:/index";
 		}
 	}
 	
@@ -117,6 +116,9 @@ public class BankingService {
 	}
 	
 	// 주문 하기
+	public void UserOrder(UserOrder userOrder) {
+		userOrderMapper.order(userOrder);
+	}
 	
 	// 전체 주문 조회
 	
