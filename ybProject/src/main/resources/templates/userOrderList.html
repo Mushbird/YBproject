@@ -12,6 +12,28 @@
     <link rel="stylesheet" id="main-stylesheet" data-version="1.1.0" href="styles/shards-dashboards.1.1.0.min.css">
     <link rel="stylesheet" href="styles/extras.1.1.0.min.css">
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+    
+    <!-- jquery를 사용하기 위한 작성 -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- 유효성 검사 (수량 입력, 입력이 되었으면 주문완료) -->
+	<script>
+		$(document).ready(function(){
+			$('#loginButton').click(function(){
+					if($('#clientId').val().length<1){
+						$('#clientId').attr('placeholder','ID를 입력해주세요.');
+						$('#clientId').focus();
+						return false;
+					}else if($('#clientPw').val().length<1){
+						$('#clientPw').attr('placeholder','PW를 입력해주세요.');
+						$('#clientPw').focus();
+						return false;
+					}else {
+						$('#login').submit();
+					}
+			});
+		});
+    </script>
+    
   </head>
   <body class="h-100">
     <div class="container-fluid">
@@ -585,10 +607,10 @@
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="login" method="post">
+					<form action="login" method="post" id="login">
 						아이디 : <input type="text" class="form-control" name="clientId" id="clientId"><br>
 						비밀번호 : <input type="password" class="form-control" name="clientPw" id="clientPw"><br>
-						<input type="submit" class="btn btn-primary" th:value="로그인">
+						<input type="button" class="btn btn-primary" id="loginButton" th:value="로그인">
 						<button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
 					</form>
 				</div>

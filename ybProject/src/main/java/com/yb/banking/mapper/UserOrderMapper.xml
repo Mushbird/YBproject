@@ -67,7 +67,7 @@
 				userOrder
 			WHERE
 				client_id = #{clientId}
-			ORDER BY order_day DESC
+			ORDER BY order_number DESC
 			LIMIT 0, 5
 	</select>
 	<!-- 전체 주문내역 가져오기 -->
