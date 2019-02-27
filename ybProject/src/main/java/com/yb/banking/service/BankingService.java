@@ -1,6 +1,8 @@
 package com.yb.banking.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -24,6 +26,7 @@ public class BankingService {
 	@Autowired private AccountMapper accountMapper;
 	@Autowired private UserOrderMapper userOrderMapper;
 	@Autowired private Client client2;
+	@Autowired private UserOrder userOrder;
 	
 	// 로그인 처리
 	public String login(HttpSession session, Client client) {
@@ -108,12 +111,42 @@ public class BankingService {
 	}
 	
 	// 내 주문 내역
-	public List<UserOrder> orderList(String ClientId) {
+	public Map<String,Object> orderList(String clientId) {
 		// Service 도착 확인
 		System.out.println("(S) 내 주문 내역");
+		// 리턴을 위한 선언
+		Map<String,Object> map = new HashMap<String,Object>();
+		userOrder.setClientId(clientId);
+		
 		// 주문 내역 가져오기
-		List<UserOrder> orderList = userOrderMapper.orderList(ClientId);
-		return orderList;
+		
+		// 순금인 경우
+		userOrder.setItemCode(300);
+		
+		UserOrder orderListGold = userOrderMapper.orderList(userOrder);
+		map.put("orderListGold", orderListGold);
+		
+		// 18K인 경우
+		userOrder.setItemCode(200);
+		UserOrder orderList18K = userOrderMapper.orderList( userOrder);
+		map.put("orderList18K", orderList18K);
+		System.out.println("map = "+ map);
+		// 14K인 경우
+		userOrder.setItemCode(100);
+		UserOrder orderList14K = userOrderMapper.orderList( userOrder);
+		map.put("orderList14K", orderList14K);
+				
+		// 은인 경우
+		userOrder.setItemCode(20);
+		UserOrder orderListSilver = userOrderMapper.orderList( userOrder);
+		map.put("orderListSilver", orderListSilver);
+				
+		// 백금인 경우
+		userOrder.setItemCode(50);
+		UserOrder orderListPlatinum = userOrderMapper.orderList(userOrder);
+		map.put("orderListPlatinum", orderListPlatinum);
+		
+		return map;
 	}
 	
 	// 최근 내 주문 내역 (5개)

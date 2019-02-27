@@ -18,12 +18,12 @@
 	<script>
 		$(document).ready(function(){
 			$('#accountCheck').click(function(){
-				$('#account').submit(function(event){
 					if($('#accountCheck').val() >= '3'){
 						(alert('계좌는 3개까지 생성이 가능합니다.'));
 						return false;
-					}
-				});
+					}else {
+		                $('#account').submit();
+		            }
 			});
 		});
     </script>
@@ -158,11 +158,6 @@
 			</th:block>
 <!-- 마이페이지 및 로그아웃 선택창 (종료)-->
               </ul>
-              <nav class="nav">
-                <a href="#" class="nav-link nav-link-icon toggle-sidebar d-md-inline d-lg-none text-center border-left" data-toggle="collapse" data-target=".header-navbar" aria-expanded="false" aria-controls="header-navbar">
-                  <i class="material-icons">&#xE5D2;</i>
-                </a>
-              </nav>
             </nav>
           </div>
 			<div class="main-content-container container-fluid px-4">
@@ -184,7 +179,7 @@
                       <img class="rounded-circle" src="images/avatars/0.jpg" alt="User Avatar" width="110"> </div>
                     	<h4 class="mb-0" ><th:block th:text="${session.clientName}"></th:block></h4>
                     <span class="text-muted d-block mb-2">회원</span>
-                    <button type="submit" class="mb-2 btn btn-sm btn-pill btn-outline-primary mr-2 " id="accountCheck" th:value="${session.accountCheck}">
+                    <button type="button" class="mb-2 btn btn-sm btn-pill btn-outline-primary mr-2 " id="accountCheck" th:value="${session.accountCheck}">
                       <i class="material-icons mr-1">credit_card</i>계좌생성</button>
                   </div>
                   	</Form>
@@ -263,8 +258,95 @@
                 </div>  
                 <!-- 계좌 끝 -->
               </div>
-        <!-- 계좌 정보 조회 (최대3개) 끝-->
+        <!-- 계좌 정보 조회 (최대3개) 끝-->        
             </div>
+<!-- 마이페이지 하단 테이블(구매 리스트) 시작 -->
+           <th:block th:if="${session.clientId != null}">
+            <div class="page-header row no-gutters py-4">
+              <div class="col-12 col-sm-4 text-center text-sm-left mb-0">
+                <span class="text-uppercase page-subtitle">Purchases List</span>
+                <h3 class="page-title">구매 내역</h3>
+              </div>
+            </div>
+<!-- 최근 구매 내역 시작 -->		
+            <div class="row">
+              <div class="col">
+                <div class="card card-small overflow-hidden mb-4" >
+                  <div class="card-header bg-dark">
+                    <h6 class="m-0 text-white">구매 내역</h6>
+                  </div>
+                  <div class="card-body p-0 pb-3 bg-dark text-center">
+                    <table class="table table-dark mb-0">
+                      <thead class="thead-dark" >
+                        <tr>
+                          <th scope="col" class="border-bottom-0">품명 코드</th>
+                          <th scope="col" class="border-bottom-0">구매 개수</th>
+                          <th scope="col" class="border-bottom-0">총 금액</th>
+                          <th scope="col" class="border-bottom-0">최근 주문 일자</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+              <!-- 순금 구매내역 -->
+                        <tr th:if="${map.orderListGold.itemCode == 300}">
+                          <td>순금</td>
+                          <td th:text="${map.orderListGold.orderCount}">
+                          </td>
+                          	<td th:text="${map.orderListGold.orderPay}">
+                          </td>
+                          <td th:text="${map.orderListGold.orderDay}">
+                          </td> 
+                        </tr>
+            <!-- 18k 구매내역 -->    
+                        <tr th:if="${map.orderList18K.itemCode == 200}">
+                          <td>18K</td>
+                          <td th:text="${map.orderList18K.orderCount}">
+                          </td>
+                          	<td th:text="${map.orderList18K.orderPay}">
+                          </td>
+                          <td th:text="${map.orderList18K.orderDay}">
+                          	
+                          </td> 
+                        </tr>
+                <!-- 14k 구매내역 -->    
+                        <tr th:if="${map.orderList14K.itemCode == 100}">
+                          <td>14K</td>
+                          <td th:text="${map.orderList14K.orderCount}">
+                          </td>
+                          	<td th:text="${map.orderList14K.orderPay}">
+                          </td>
+                          <td th:text="${map.orderList14K.orderDay}">
+                          	
+                          </td> 
+                        </tr>
+                <!-- 은 구매내역 -->    
+                        <tr th:if="${map.orderListSilver.itemCode == 20}">
+                          <td>은</td>
+                          <td th:text="${map.orderListSilver.orderCount}">
+                          </td>
+                          	<td th:text="${map.orderListSilver.orderPay}">
+                          </td>
+                          <td th:text="${map.orderListSilver.orderDay}">
+                          	
+                          </td> 
+                        </tr>
+                 <!-- 백금 구매내역 -->    
+                        <tr th:if="${map.orderListPlatinum.itemCode == 50}">
+                          <td>백금</td>
+                          <td th:text="${map.orderListPlatinum.orderCount}">
+                          </td>
+                          	<td th:text="${map.orderListPlatinum.orderPay}">
+                          </td>
+                          <td th:text="${map.orderListPlatinum.orderDay}">   	
+                          </td> 
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </th:block>
+<!-- 마이페이지 하단 테이블(구매 리스트) 끝 -->
 <!-- End Default Light Table 프로필 정보 -->
           </div>
           <footer class="main-footer d-flex p-2 px-3 bg-white border-top">

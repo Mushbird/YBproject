@@ -14,18 +14,23 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 <!-- jquery를 사용하기 위한 작성 -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<!-- 유효성 처리 -->
 	<script>
 		$(document).ready(function(){
-			$('#accountCheck').click(function(){
-				$('#account').submit(function(event){
-					if($('#accountCheck').val() >= '3'){
-						alert("계좌는 3개까지 생성이 가능합니다.");
-					}
+				$('#accountCreate').click(function(){
+						if($('#accountName').val().length<1){
+							$('#accountName').attr('placeholder','계좌명을 입력해주세요.');
+							$('#accountName').focus();
+							return false;
+						}else if($('#deposit').val().length<1){
+							$('#deposit').attr('placeholder','예수금을 입력해주세요.');
+							$('#deposit').focus();
+							return false;
+						}else {
+							$('#account').submit();
+						}
 				});
 			});
-		});
-    </script>
+	</script>
   </head>
   <body class="h-100">
     <div class="container-fluid">
@@ -157,11 +162,6 @@
 			</th:block>
 <!-- 마이페이지 및 로그아웃 선택창 (종료)-->
               </ul>
-              <nav class="nav">
-                <a href="#" class="nav-link nav-link-icon toggle-sidebar d-md-inline d-lg-none text-center border-left" data-toggle="collapse" data-target=".header-navbar" aria-expanded="false" aria-controls="header-navbar">
-                  <i class="material-icons">&#xE5D2;</i>
-                </a>
-              </nav>
             </nav>
           </div>
 <!-- 메인 페이지 (시작) -->
@@ -205,7 +205,7 @@
 								</select>
                                </div>
                             </div>
-                            <button type="submit" class="btn btn-white" id="account">생성하기</button>
+                            <button type="button" class="btn btn-white" id="accountCreate">생성하기</button>
                           </form>
                         </div>
                       </div>

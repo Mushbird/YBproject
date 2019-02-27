@@ -32,7 +32,7 @@
 				
 			)
 	</insert>
-	<!-- 나의 주문내역 가져오기 -->
+	<!-- 나의 주문내역 가져오기 (품명 코드 별)-->
 	<select id="orderList"
 				parameterType="com.yb.banking.vo.UserOrder"
 				resultType="com.yb.banking.vo.UserOrder">
@@ -42,12 +42,14 @@
 				account_number as accountNumber,
 				client_id as clientId,
 				item_code as itemCode,
-				order_count as orderCount,
-				order_pay as orderPay
+				sum(order_count) as orderCount,
+				sum(order_pay) as orderPay
 			FROM
 				userOrder
 			WHERE
-				client_id = #{clientId}
+				client_id = #{clientId} 
+			AND
+				item_code = #{itemCode}
 	</select>
 	<!-- 나의 최근 주문내역 가져오기 (5개만) -->
 	<select id="orderListRecent"

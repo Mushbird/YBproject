@@ -1,5 +1,7 @@
 package com.yb.banking.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,8 +82,12 @@ public class BankingController {
 	public String mypage(Model model, HttpSession session) {
 		// Controller 도착 확인
 		System.out.println("(C) mypage(계좌조회) ");
+		// 계좌 조회
 		model.addAttribute("account",bankingService.accountInformation((String)session.getAttribute("clientId")));
-		model.addAttribute("order", bankingService.orderList((String)session.getAttribute("clientId")));
+		
+		// 주문 내역 조회
+		model.addAttribute("map", (Map<String,Object>)bankingService.orderList((String)session.getAttribute("clientId")));
+		System.out.println("model "+model);
 		return "mypage";
 	}
 	

@@ -12,7 +12,7 @@ public interface UserOrderMapper {
 	int order(UserOrder userOrder);
 	
 	// 주문 조회(회원)
-	List<UserOrder> orderList(String clientId);
+	UserOrder orderList(UserOrder itemCode);
 	
 	// 최근 주문 조회(회원)
 	List<UserOrder> orderListRecent(String clientId);

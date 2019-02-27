@@ -18,16 +18,17 @@
 	<script>
 		$(document).ready(function(){
 			$('#order').click(function(){
-				$('#userOrder').submit(function(event){
-					if($('#orderCount').val().length<1){
+					if($('#accountNumber').val() == null){
+						(alert("계좌를 생성하시고 진행해주세요."));
+						/* window.location.href = '/userOrderList'; */
+						return false;
+					}else if($('#orderCount').val().length<1){
 						$('#orderCount').attr('placeholder','수량을 입력해주세요.');
 						$('#orderCount').focus();
 						return false;
-					}else if($('#accountNumber').val() == null){
-						(alert("계좌를 생성하시고 진행해주세요."));
-						return false;
+					}else {
+						$('#userOrder').submit();
 					}
-				});
 			});
 		});
     </script>
@@ -162,11 +163,6 @@
 			</th:block>
 <!-- 마이페이지 및 로그아웃 선택창 (종료)-->
               </ul>
-              <nav class="nav">
-                <a href="#" class="nav-link nav-link-icon toggle-sidebar d-md-inline d-lg-none text-center border-left" data-toggle="collapse" data-target=".header-navbar" aria-expanded="false" aria-controls="header-navbar">
-                  <i class="material-icons">&#xE5D2;</i>
-                </a>
-              </nav>
             </nav>
           </div>
 <!-- 메인 페이지 (시작) -->
@@ -203,15 +199,10 @@
                             </div>
                             <div class="form-row">
                               <div class="form-group col-md-6">
-                                <label for="feFirstName">1개당 가격</label>
+                                <label for="feFirstName">가격 (3.75g기준)</label>
                                 <input type="text" class="form-control" name="orderPay" id="orderPay" th:value="${orderPay}" readonly></div>
                             </div>
-                            <div class="form-row">
-                              <div class="form-group col-md-6">
-                                <label for="feFirstName">수량</label>
-                                <input type="text" class="form-control" name="orderCount" id="orderCount"></div>
-                            </div>
-                            <div class="form-row">
+                             <div class="form-row">
                                <div class="form-group col-md-6">
                                 <label for="feLastName">계좌 선택</label>
                                 <select class="form-control" name="accountNumber" id="accountNumber">
@@ -221,6 +212,12 @@
 								</select>
                                </div>
                             </div>
+                            <div class="form-row">
+                              <div class="form-group col-md-6">
+                                <label for="feFirstName">수량</label>
+                                <input type="text" class="form-control" name="orderCount" id="orderCount"></div>
+                            </div>
+
                             <button type="submit" class="btn btn-white" id="order">주문하기</button>
                           </form>
                         </div>

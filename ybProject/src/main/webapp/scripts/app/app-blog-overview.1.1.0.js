@@ -120,7 +120,7 @@
     // Data
     var bouData = {
       // Generate the days labels on the X axis.
-      labels: Array.from(new Array(30), function (_, i) {
+      labels: Array.from(new Array(10), function (_, i) {
         return i === 0 ? 1 : i;
       }),
       datasets: [{
